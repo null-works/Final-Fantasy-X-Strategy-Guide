@@ -1,0 +1,3213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Fantasy X HD Remaster - Complete Strategy Guide</title>
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1a2332;
+            --bg-card: #1e293b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-blue: #38bdf8;
+            --accent-purple: #a78bfa;
+            --accent-gold: #fbbf24;
+            --accent-red: #f87171;
+            --accent-green: #4ade80;
+            --border-color: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --glow: 0 0 20px rgba(56, 189, 248, 0.3);
+            --font-size-base: 16px;
+        }
+
+        .light-mode {
+            --bg-primary: #f1f5f9;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e2e8f0;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --glow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            font-size: var(--font-size-base);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        #search-input {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            color: var(--text-primary);
+            width: 250px;
+            font-size: 0.9rem;
+        }
+
+        #search-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: var(--glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            box-shadow: var(--shadow);
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-result-item:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Font Size Controls */
+        .font-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.25rem;
+        }
+
+        .font-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            min-width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .font-btn:hover {
+            background: var(--bg-card);
+            color: var(--accent-blue);
+        }
+
+        .font-btn:active {
+            transform: scale(0.95);
+        }
+
+        .font-size-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            padding: 0 0.25rem;
+            min-width: 28px;
+            text-align: center;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 73px;
+            left: 0;
+            width: 280px;
+            height: calc(100vh - 73px);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 1rem 0;
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-section {
+            padding: 0.5rem 1rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 0.6rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 2px 0.5rem;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.2), rgba(167, 139, 250, 0.1));
+            color: var(--accent-blue);
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .nav-item-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--bg-tertiary);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            color: var(--accent-blue);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            margin-top: 73px;
+            padding: 2rem 3rem;
+            margin-right: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 50%);
+            animation: pulse 10s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Styling */
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-tertiary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+
+        .section-header:hover {
+            background: var(--bg-card);
+        }
+
+        .section-header h2 {
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .collapse-icon {
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .section.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            padding: 1.5rem;
+            display: block;
+        }
+
+        .section.collapsed .section-content {
+            display: none;
+        }
+
+        /* Content Typography */
+        .section-content h3 {
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .section-content h4 {
+            color: var(--accent-purple);
+            font-size: 1rem;
+            margin: 1.25rem 0 0.5rem 0;
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .section-content ul, .section-content ol {
+            margin: 0.75rem 0 1rem 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .section-content li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: var(--bg-tertiary);
+        }
+
+        /* Warning/Info Boxes */
+        .warning-box {
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid var(--accent-red);
+            border-left: 4px solid var(--accent-red);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .warning-box strong {
+            color: var(--accent-red);
+        }
+
+        .info-box {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .info-box strong {
+            color: var(--accent-blue);
+        }
+
+        .tip-box {
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid var(--accent-green);
+            border-left: 4px solid var(--accent-green);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .tip-box strong {
+            color: var(--accent-green);
+        }
+
+        .gold-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid var(--accent-gold);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .gold-box strong {
+            color: var(--accent-gold);
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--accent-purple);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .quote-box p {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-box .attribution {
+            color: var(--accent-gold);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+        }
+
+        /* Tablet Styles (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .main-content {
+                margin-right: 0.5rem;
+                padding: 2rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Mobile/Tablet Styles (up to 900px) */
+        @media (max-width: 900px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-right: 0;
+                padding: 1.5rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            #search-input {
+                width: 150px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .font-controls {
+                padding: 0.15rem;
+            }
+
+            .font-btn {
+                padding: 0.2rem 0.4rem;
+                min-width: 28px;
+            }
+
+            .font-size-label {
+                display: none;
+            }
+
+            /* Sidebar overlay background */
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 998;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+        }
+
+        /* Phone Styles (up to 600px) */
+        @media (max-width: 600px) {
+            header {
+                padding: 0.75rem 1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .logo h1 {
+                display: none;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .header-controls {
+                gap: 0.5rem;
+            }
+
+            #search-input {
+                width: 100px;
+                padding: 0.4rem 0.8rem 0.4rem 2rem;
+                font-size: 0.85rem;
+            }
+
+            .theme-toggle {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.85rem;
+            }
+
+            .theme-toggle span:last-child {
+                display: none;
+            }
+
+            .main-content {
+                padding: 1rem;
+                margin-top: 65px;
+            }
+
+            .sidebar {
+                top: 65px;
+                height: calc(100vh - 65px);
+                width: 85vw;
+                max-width: 300px;
+            }
+
+            .hero {
+                padding: 1.5rem 1rem;
+                border-radius: 12px;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .section {
+                border-radius: 8px;
+            }
+
+            .section-header {
+                padding: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1rem;
+                gap: 0.5rem;
+            }
+
+            .section-number {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+            }
+
+            .section-content {
+                padding: 1rem;
+            }
+
+            .section-content h3 {
+                font-size: 1rem;
+            }
+
+            .section-content p,
+            .section-content li {
+                font-size: 0.9rem;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 0.4rem 0.5rem;
+            }
+
+            .tip-box, .warning-box {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .nav-item {
+                padding: 0.75rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        /* Very small phones (up to 380px) */
+        @media (max-width: 380px) {
+            header {
+                padding: 0.5rem 0.75rem;
+            }
+
+            #search-input {
+                width: 80px;
+            }
+
+            .font-controls {
+                display: none;
+            }
+
+            .main-content {
+                padding: 0.75rem;
+            }
+
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+
+            .section-header h2 {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Touch device improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-item {
+                padding: 0.85rem 1rem;
+            }
+
+            .section-header {
+                padding: 1rem 1.25rem;
+            }
+
+            .font-btn {
+                min-width: 40px;
+                min-height: 40px;
+            }
+
+            .theme-toggle,
+            .menu-toggle {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* Landscape phone */
+        @media (max-width: 900px) and (orientation: landscape) {
+            .hero {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero p {
+                display: none;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* Highlight for search */
+        mark {
+            background: rgba(251, 191, 36, 0.4);
+            color: inherit;
+            padding: 0.1em 0.2em;
+            border-radius: 2px;
+        }
+
+        /* Achievement Tracker Styles */
+        .achievement-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .stat-box {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .achievement-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-color: transparent;
+            color: white;
+        }
+
+        .reset-btn {
+            background: rgba(248, 113, 113, 0.2);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .reset-btn:hover {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .achievement-progress-bar {
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .achievement-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-gold));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .achievement-category {
+            margin-bottom: 1rem;
+        }
+
+        .achievement-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .achievement-item:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .achievement-item.completed {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        .achievement-item.completed .achievement-name {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .achievement-item.hidden {
+            display: none;
+        }
+
+        .achievement-checkbox {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            padding-top: 0.2rem;
+        }
+
+        .achievement-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            height: 24px;
+            width: 24px;
+            min-width: 24px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .achievement-checkbox:hover .checkmark {
+            border-color: var(--accent-blue);
+        }
+
+        .achievement-checkbox input:checked ~ .checkmark {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .achievement-checkbox input:checked ~ .checkmark::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .achievement-info {
+            flex: 1;
+        }
+
+        .achievement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .achievement-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .achievement-tier {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .achievement-tier.bronze {
+            background: rgba(205, 127, 50, 0.2);
+            color: #cd7f32;
+        }
+
+        .achievement-tier.silver {
+            background: rgba(192, 192, 192, 0.2);
+            color: #c0c0c0;
+        }
+
+        .achievement-tier.gold {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+        }
+
+        .achievement-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-guide {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .achievement-guide .warning-text {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .achievement-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .achievement-stats {
+                justify-content: center;
+            }
+
+            .achievement-buttons {
+                justify-content: center;
+            }
+
+            .achievement-item {
+                flex-direction: column;
+            }
+
+            .achievement-checkbox {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">X</div>
+            <h1>FFX Strategy Guide</h1>
+        </div>
+        <div class="header-controls">
+            <div class="search-container">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" id="search-input" placeholder="Search guide...">
+                <div class="search-results" id="searchResults"></div>
+            </div>
+            <div class="font-controls" title="Adjust font size">
+                <button class="font-btn" id="fontDecrease" aria-label="Decrease font size">A-</button>
+                <span class="font-size-label" id="fontSizeLabel">100%</span>
+                <button class="font-btn" id="fontIncrease" aria-label="Increase font size">A+</button>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <span id="themeIcon">&#9790;</span>
+                <span id="themeText">Light</span>
+            </button>
+            <button class="menu-toggle" id="menuToggle">&#9776;</button>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-title">Navigation</div>
+            <a href="#intro" class="nav-item"><span class="nav-item-number">1</span>Introduction</a>
+            <a href="#walkthrough" class="nav-item"><span class="nav-item-number">2</span>Story Walkthrough</a>
+            <a href="#sphere-grid" class="nav-item"><span class="nav-item-number">3</span>Sphere Grid</a>
+            <a href="#celestial" class="nav-item"><span class="nav-item-number">4</span>Celestial Weapons</a>
+            <a href="#aeons" class="nav-item"><span class="nav-item-number">5</span>Aeons Guide</a>
+            <a href="#blitzball" class="nav-item"><span class="nav-item-number">6</span>Blitzball</a>
+            <a href="#dark-aeons" class="nav-item"><span class="nav-item-number">7</span>Dark Aeons & Penance</a>
+            <a href="#monster-arena" class="nav-item"><span class="nav-item-number">8</span>Monster Arena & Bestiary</a>
+            <a href="#overdrives" class="nav-item"><span class="nav-item-number">9</span>Overdrives</a>
+            <a href="#items" class="nav-item"><span class="nav-item-number">10</span>Items & Customization</a>
+            <a href="#achievements" class="nav-item"><span class="nav-item-number">11</span>Achievement Tracker</a>
+            <a href="#tips" class="nav-item"><span class="nav-item-number">12</span>Tips & FAQs</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>FINAL FANTASY X</h1>
+                <h2>HD Remaster Complete Strategy Guide</h2>
+                <p>Covering Story Walkthrough, Sphere Grid, Celestial Weapons, Aeons, Blitzball, Dark Aeons, Penance, and 100% Completion</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Introduction -->
+        <section class="section" id="intro">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">1</span>Introduction and Game Overview</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>Final Fantasy X, originally released in 2001, received an HD Remaster in 2014 that brought enhanced visuals and the International Version content to a wider audience. This entry marked the series' transition to fully 3D environments and introduced voice acting for the first time. The HD Remaster includes all bonus content from the International Version, including the Expert Sphere Grid, Dark Aeons, and Penance.</p>
+
+                <p>Unlike previous entries, FFX uses a turn-based <strong>Conditional Turn-Based Battle (CTB)</strong> system where each action has different recovery times affecting turn order. The game also introduced the ability to swap party members mid-battle, making strategic party composition crucial.</p>
+
+                <h3>HD Remaster Exclusive Content</h3>
+                <ul>
+                    <li>Expert Sphere Grid option from game start</li>
+                    <li>8 Dark Aeons superbosses (unlocked after escaping Bevelle)</li>
+                    <li>Penance ultimate superboss (12 million HP)</li>
+                    <li>Ribbon auto-ability for armor customization</li>
+                    <li>Enhanced trophy/achievement system</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 2: Walkthrough -->
+        <section class="section" id="walkthrough">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">2</span>Main Story Walkthrough</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>The main story takes approximately 40-50 hours to complete, following Tidus as he journeys across Spira with Yuna and her guardians. Below is a comprehensive progression guide with key collectibles and boss strategies.</p>
+
+                <h3>Story Progression Order</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Location</th>
+                            <th>Key Events & Items</th>
+                        </tr>
+                        <tr><td><strong>Zanarkand/Dream Zanarkand</strong></td><td>Tutorial area introducing basic combat</td></tr>
+                        <tr><td><strong>Submerged Ruins</strong></td><td>Encounter Geosgaeno boss, obtain items</td></tr>
+                        <tr><td><strong>Besaid Island/Village</strong></td><td>Get Valefor (first Aeon), Moon Crest on beach</td></tr>
+                        <tr><td><strong>S.S. Liki</strong></td><td>Optional Jecht Shot minigame - critical for Blitzball!</td></tr>
+                        <tr><td><strong>Kilika</strong></td><td>Obtain Ifrit after Sinspawn Geneaux boss</td></tr>
+                        <tr><td><strong>Luca</strong></td><td>Mandatory Blitzball tournament, obtain Jecht Sphere</td></tr>
+                        <tr><td><strong>Mi'ihen Highroad</strong></td><td>Mars Crest at southern Oldroad</td></tr>
+                        <tr><td><strong>Mushroom Rock Road</strong></td><td>Operation Mi'ihen, Sinspawn Gui boss</td></tr>
+                        <tr><td><strong>Djose Temple</strong></td><td>Obtain Ixion, destruction sphere treasure!</td></tr>
+                        <tr><td><strong>Moonflow</strong></td><td>Ride the shoopuf, Rikku joins party</td></tr>
+                        <tr><td><strong>Guadosalam</strong></td><td>Visit Farplane, Venus Crest location</td></tr>
+                        <tr><td><strong>Thunder Plains</strong></td><td>Lightning dodge challenge area (Venus Sigil)</td></tr>
+                        <tr><td><strong>Macalania Woods/Temple</strong></td><td>Obtain Shiva, Spherimorph boss unlocks Jecht Spheres</td></tr>
+                        <tr><td><strong>Bikanel/Home</strong></td><td>Mercury Crest in Sanubia Desert</td></tr>
+                        <tr><td><strong>Bevelle</strong></td><td>Obtain Bahamut, destruction sphere treasure critical!</td></tr>
+                        <tr><td><strong>Calm Lands</strong></td><td>Monster Arena unlocks, Chocobo training for Celestial Weapons</td></tr>
+                        <tr><td><strong>Mt. Gagazet</strong></td><td>Saturn Crest location, Biran/Yenke boss (steal Lv.3 Key Spheres!)</td></tr>
+                        <tr><td><strong>Zanarkand Ruins</strong></td><td>Sun Crest location - GET IT NOW (Dark Bahamut blocks later!)</td></tr>
+                        <tr><td><strong>Inside Sin</strong></td><td>Final dungeon leading to Yu Yevon</td></tr>
+                    </table>
+                </div>
+
+                <h3>Critical Missable Items</h3>
+                <div class="warning-box">
+                    <strong>WARNING:</strong> These items can become blocked by Dark Aeons in HD Remaster!
+                    <ul>
+                        <li><strong>Besaid Temple Destruction Sphere:</strong> Get before Dark Valefor spawns</li>
+                        <li><strong>Macalania Temple Destruction Sphere:</strong> Get before Dark Shiva spawns</li>
+                        <li><strong>Sun Crest (Zanarkand):</strong> Get immediately after Yunalesca - Dark Bahamut blocks later</li>
+                        <li><strong>Jecht Shot:</strong> Learn on S.S. Winno (can retry later via airship)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Sphere Grid -->
+        <section class="section" id="sphere-grid">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">3</span>Sphere Grid System</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>The Sphere Grid replaces traditional leveling. Characters earn AP from battles to gain Sphere Levels (S.Lvl), which let them move across the grid. Activating nodes requires corresponding spheres obtained from battles or chests.</p>
+
+                <h3>Standard vs Expert Sphere Grid</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Standard Grid</th>
+                            <th>Expert Grid</th>
+                        </tr>
+                        <tr><td>Total Nodes</td><td>~860 nodes</td><td>~720 nodes (68 fewer)</td></tr>
+                        <tr><td>Starting Position</td><td>Each character starts in own area</td><td>All characters start in center</td></tr>
+                        <tr><td>Flexibility</td><td>Linear progression by role</td><td>Choose any path from start</td></tr>
+                        <tr><td>Recommended For</td><td>First-time players</td><td>Experienced players, custom builds</td></tr>
+                        <tr><td>Max Stats Potential</td><td>Higher (more nodes for HP)</td><td>Lower but still sufficient for superbosses</td></tr>
+                    </table>
+                </div>
+
+                <h3>Sphere Types</h3>
+                <ul>
+                    <li><strong>Power Sphere:</strong> Activates Strength/HP/Defense nodes</li>
+                    <li><strong>Mana Sphere:</strong> Activates Magic/MP/Magic Defense nodes</li>
+                    <li><strong>Speed Sphere:</strong> Activates Agility/Evasion/Accuracy nodes</li>
+                    <li><strong>Ability Sphere:</strong> Activates ability nodes</li>
+                    <li><strong>Fortune Sphere:</strong> Activates Luck nodes</li>
+                    <li><strong>Key Spheres (Lv 1-4):</strong> Unlock locked nodes to access other paths</li>
+                    <li><strong>Clear Sphere:</strong> Removes any activated node (for stat maxing)</li>
+                    <li><strong>Special Stat Spheres (+4 nodes):</strong> HP +300, MP +40, Str/Def/etc +4</li>
+                </ul>
+
+                <h3>Character Roles and Recommended Paths</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Character</th>
+                            <th>Primary Role</th>
+                            <th>Key Abilities</th>
+                            <th>Recommended Secondary Path</th>
+                        </tr>
+                        <tr><td><strong>Tidus</strong></td><td>Fast physical attacker</td><td>Haste, Hastega, Quick Hit</td><td>Rikku's path for Steal/Use</td></tr>
+                        <tr><td><strong>Yuna</strong></td><td>Summoner/Healer</td><td>All White Magic, Aeons</td><td>Lulu's path for Black Magic</td></tr>
+                        <tr><td><strong>Wakka</strong></td><td>Ranged physical/Status</td><td>Dark/Silence Attack, Aim</td><td>Any physical path</td></tr>
+                        <tr><td><strong>Lulu</strong></td><td>Black Mage</td><td>All Black Magic tiers</td><td>Yuna's path for more Magic stats</td></tr>
+                        <tr><td><strong>Kimahri</strong></td><td>Blue Mage/Flexible</td><td>Lancet, Ronso Rages</td><td>Rikku's path (Steal/Use early!)</td></tr>
+                        <tr><td><strong>Auron</strong></td><td>Tank/Power attacker</td><td>Power/Magic/Armor/Mental Break</td><td>Tidus's path for speed</td></tr>
+                        <tr><td><strong>Rikku</strong></td><td>Thief/Alchemist</td><td>Steal, Use, Mug, Mix</td><td>Speed paths</td></tr>
+                    </table>
+                </div>
+
+                <h3>Early Game Tips</h3>
+                <div class="tip-box">
+                    <strong>Pro Tips:</strong>
+                    <ul>
+                        <li>Send Kimahri toward Rikku's path ASAP to get Steal and Use before she joins</li>
+                        <li>Prioritize Lulu's progression - elemental magic is crucial for early bosses</li>
+                        <li>Get Tidus to Haste quickly - most useful support spell in the game</li>
+                        <li>Learn Extract abilities (HD exclusive) to farm specific sphere types</li>
+                        <li>Don't skip nodes - spheres are plentiful; wasted movement is more costly</li>
+                    </ul>
+                </div>
+
+                <h3>Stat Maxing for Superbosses</h3>
+                <p>To fight Dark Aeons and Penance, you need to maximize key stats:</p>
+                <ul>
+                    <li><strong>Strength:</strong> 255 (max damage output)</li>
+                    <li><strong>Defense/Magic Defense:</strong> 255 (survival)</li>
+                    <li><strong>Agility:</strong> 170+ with Haste (max turn frequency)</li>
+                    <li><strong>Luck:</strong> 114+ for Dark Yojimbo/Penance, or 205+ for Dark Mindy</li>
+                    <li><strong>HP:</strong> 9,999 is sufficient with proper armor (Break HP Limit optional)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 4: Celestial Weapons -->
+        <section class="section" id="celestial">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">4</span>Celestial Weapons</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>Celestial Weapons are each character's ultimate weapon. They require the Celestial Mirror, the weapon itself, a Crest, and a Sigil to fully power up. Unpowered weapons have 'No AP' and are nearly useless - you MUST power them up.</p>
+
+                <h3>Getting the Celestial Mirror</h3>
+                <ol>
+                    <li>Win the Chocobo race at Remiem Temple (Calm Lands) to get Cloudy Mirror</li>
+                    <li>Go to Macalania Woods South, find the mother missing her husband</li>
+                    <li>Find the husband at the campsite (two screens east, one north)</li>
+                    <li>Return and talk to the couple until their son goes missing</li>
+                    <li>Take the crystal path up and find the son at the altar</li>
+                    <li>Use the Cloudy Mirror to transform it into the Celestial Mirror</li>
+                </ol>
+
+                <h3>Complete Celestial Weapon Guide</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Character</th>
+                            <th>Weapon</th>
+                            <th>Weapon Location</th>
+                            <th>Crest</th>
+                            <th>Sigil Challenge</th>
+                        </tr>
+                        <tr><td><strong>Tidus</strong></td><td>Caladbolg</td><td>NW Calm Lands slope</td><td>Sun Crest: Zanarkand Dome after Yunalesca</td><td>Sun Sigil: Chocobo race 0:00 time</td></tr>
+                        <tr><td><strong>Yuna</strong></td><td>Nirvana</td><td>Capture all Calm Lands fiends</td><td>Moon Crest: Besaid beach (right alcove)</td><td>Moon Sigil: Defeat all Belgemine's Aeons</td></tr>
+                        <tr><td><strong>Wakka</strong></td><td>World Champion</td><td>Bartender in Luca Cafe (after Blitzball wins)</td><td>Jupiter Crest: Aurochs locker room</td><td>Jupiter Sigil: Win all 3 Overdrive reels in Blitzball</td></tr>
+                        <tr><td><strong>Lulu</strong></td><td>Onion Knight</td><td>Activate 3 Cactuar stones in Thunder Plains</td><td>Venus Crest: Farplane in Guadosalam</td><td>Venus Sigil: Dodge 200 consecutive lightning bolts</td></tr>
+                        <tr><td><strong>Kimahri</strong></td><td>Spirit Lance</td><td>Activate 3 Cactuar stones, follow ghost</td><td>Saturn Crest: Mt. Gagazet (where you fought Seymour)</td><td>Saturn Sigil: Butterfly catching in Macalania Woods</td></tr>
+                        <tr><td><strong>Auron</strong></td><td>Masamune</td><td>Rusty Sword + Mushroom Rock statue</td><td>Mars Crest: Mi'ihen Oldroad south end</td><td>Mars Sigil: Unlock 10 Monster Arena creations</td></tr>
+                        <tr><td><strong>Rikku</strong></td><td>Godhand</td><td>Airship password: GODHAND</td><td>Mercury Crest: Sanubia Desert sand pit</td><td>Mercury Sigil: Complete Cactuar sidequest</td></tr>
+                    </table>
+                </div>
+
+                <h3>Fully Powered Abilities</h3>
+                <div class="info-box">
+                    <strong>Each powered Celestial Weapon grants:</strong>
+                    <ul>
+                        <li><strong>Break Damage Limit:</strong> Deal more than 9,999 per hit</li>
+                        <li><strong>Triple Overdrive:</strong> Overdrive gauge fills 3x faster</li>
+                        <li><strong>Ignore Defense:</strong> Attacks ignore enemy Defense stat</li>
+                        <li><strong>Character-specific ability</strong> (Evade & Counter, First Strike, etc.)</li>
+                        <li><strong>Aeon Damage Limit Break:</strong> Each weapon powers up a corresponding Aeon</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Aeons -->
+        <section class="section" id="aeons">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">5</span>Aeons Guide</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>Aeons are powerful summons that replace your party in battle. Yuna obtains 5 story Aeons and 3 optional hidden Aeons. Each has unique abilities and can be taught most abilities your characters know.</p>
+
+                <h3>Story Aeons</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Aeon</th>
+                            <th>Location</th>
+                            <th>Overdrive</th>
+                            <th>Special Notes</th>
+                        </tr>
+                        <tr><td><strong>Valefor</strong></td><td>Besaid Temple</td><td>Energy Ray / Energy Blast</td><td>Talk to girl with dog in Besaid for 2nd Overdrive</td></tr>
+                        <tr><td><strong>Ifrit</strong></td><td>Kilika Temple</td><td>Hellfire</td><td>Fire elemental, absorbs fire damage</td></tr>
+                        <tr><td><strong>Ixion</strong></td><td>Djose Temple</td><td>Thor's Hammer</td><td>Lightning elemental, Aerospark removes buffs</td></tr>
+                        <tr><td><strong>Shiva</strong></td><td>Macalania Temple</td><td>Diamond Dust</td><td>Ice elemental, high Evasion</td></tr>
+                        <tr><td><strong>Bahamut</strong></td><td>Bevelle Temple</td><td>Mega Flare</td><td>Non-elemental, high stats, can Break Damage Limit natively</td></tr>
+                    </table>
+                </div>
+
+                <h3>Hidden Aeons</h3>
+
+                <h4>Yojimbo</h4>
+                <ul>
+                    <li><strong>Location:</strong> Cavern of the Stolen Fayth (Calm Lands gorge)</li>
+                    <li><strong>Cost:</strong> 190,350 to 250,000+ Gil (negotiate!)</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Negotiation Tip:</strong> Answer "To defeat the most powerful enemies" and offer half his asking price +1 Gil
+                </div>
+                <p><strong>Special Mechanic:</strong> Pay Gil each turn. Has 4 attacks based on hidden 'motivation' formula: Daigoro (weak), Kozuka (medium), Wakizashi (strong), Zanmato (instant kill ANYTHING)</p>
+                <div class="gold-box">
+                    <strong>Zanmato Tips:</strong> Higher payments, full Overdrive gauge, and high compatibility increase Zanmato chance. Can one-shot Dark Aeons and Penance!
+                </div>
+
+                <h4>Anima</h4>
+                <ul>
+                    <li><strong>Location:</strong> Baaj Temple (Airship coordinates X=11-16, Y=57-63)</li>
+                    <li><strong>Requirements:</strong> Must have ALL Destruction Sphere treasures from: Besaid, Kilika, Djose, Macalania, Bevelle, and Zanarkand temples</li>
+                    <li><strong>Unique Attack - Pain:</strong> Deals massive non-elemental damage with instant death chance, ignores defense</li>
+                    <li><strong>Overdrive - Oblivion:</strong> 16 hits to all enemies, can deal up to ~1.6 million damage total. Strongest single attack in the game!</li>
+                </ul>
+
+                <h4>Magus Sisters</h4>
+                <ul>
+                    <li><strong>Location:</strong> Remiem Temple (Calm Lands)</li>
+                    <li><strong>Requirements:</strong>
+                        <ul>
+                            <li>Must have Yojimbo and Anima</li>
+                            <li>Defeat Belgemine's Bahamut to get Flower Scepter</li>
+                            <li>Capture all Mt. Gagazet fiends for Blossom Crown (from Monster Arena)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Unique Mechanic:</strong> Three sisters (Cindy, Sandy, Mindy) fight as separate units. You give suggestions rather than direct commands. Overdrive 'Delta Attack' requires all three gauges full.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 6: Blitzball -->
+        <section class="section" id="blitzball">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">6</span>Blitzball Guide</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>Blitzball is FFX's signature minigame - an underwater sport combining soccer and water polo. It's required for Wakka's Celestial Weapon and Overdrives. The key to easy Blitzball is getting the Jecht Shot.</p>
+
+                <h3>Getting the Jecht Shot</h3>
+                <div class="info-box">
+                    <strong>First Opportunity:</strong> On S.S. Winno traveling from Kilika to Luca
+                    <ul>
+                        <li>SAVE before interacting with the blitzball on deck!</li>
+                        <li>When text appears on screen, press D-pad direction + X simultaneously toward the text</li>
+                        <li>Must succeed 11 times total</li>
+                        <li>If you fail, reload and try again</li>
+                        <li><strong>Missed It?</strong> Return to Kilika via airship later and take the ship again</li>
+                    </ul>
+                </div>
+
+                <h3>Winning the Luca Tournament</h3>
+                <ol>
+                    <li>Set control to Manual A for player control</li>
+                    <li>First half: Play keep-away, don't try to score. Pass to avoid tackles.</li>
+                    <li>At halftime, Tidus levels up - equip Jecht Shot (or Sphere Shot)</li>
+                    <li>Second half: Draw defenders away, pass to Tidus, swim close to goal</li>
+                    <li>Jecht Shot eliminates 2 defenders from the play automatically!</li>
+                </ol>
+
+                <h3>Best Recruitable Players</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Position</th>
+                            <th>Player</th>
+                            <th>Location</th>
+                            <th>Why They're Good</th>
+                        </tr>
+                        <tr><td>Goalkeeper</td><td><strong>Nimrook</strong></td><td>Al Bhed Psyches (recruit when contract expires)</td><td>Best CA (catch) in game</td></tr>
+                        <tr><td>Defender</td><td><strong>Ropp</strong></td><td>Mi'ihen Travel Agency</td><td>High EN and AT</td></tr>
+                        <tr><td>Defender</td><td><strong>Naida</strong></td><td>Calm Lands Travel Agency</td><td>Good all-around defender</td></tr>
+                        <tr><td>Midfielder</td><td><strong>Brother</strong></td><td>Airship bridge</td><td>Fastest player in game</td></tr>
+                        <tr><td>Midfielder</td><td><strong>Linna</strong></td><td>Macalania Temple road</td><td>High stats, early availability</td></tr>
+                        <tr><td>Forward</td><td><strong>Tidus</strong></td><td>Your party</td><td>Jecht Shot is broken</td></tr>
+                        <tr><td>Forward</td><td><strong>Wakka</strong></td><td>Your party (optional)</td><td>Can learn Aurochs Spirit</td></tr>
+                    </table>
+                </div>
+
+                <h3>Wakka's Rewards from Blitzball</h3>
+                <p>Required for his Celestial Weapon (Jupiter Sigil):</p>
+                <ul>
+                    <li><strong>Attack Reels:</strong> Tournament 1st place prize (best Overdrive!)</li>
+                    <li><strong>Status Reels:</strong> League 1st place prize</li>
+                    <li><strong>Auroch Reels:</strong> Tournament 1st place prize</li>
+                    <li><strong>Jupiter Sigil:</strong> Random prize after getting all three reels</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Exit and re-enter Blitzball menu to re-roll tournament prizes until you see what you need!
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Dark Aeons -->
+        <section class="section" id="dark-aeons">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">7</span>Dark Aeons and Penance</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>Dark Aeons are superboss versions of Yuna's summons, added in the International/HD versions. They appear after escaping Bevelle and block access to certain areas. Defeating all 8 unlocks Penance.</p>
+
+                <h3>Dark Aeon Locations and Stats</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Dark Aeon</th>
+                            <th>Location</th>
+                            <th>HP</th>
+                            <th>Danger Level</th>
+                        </tr>
+                        <tr><td><strong>Dark Valefor</strong></td><td>Besaid Village entrance</td><td>800,000</td><td>Medium - blocks Besaid</td></tr>
+                        <tr><td><strong>Dark Ifrit</strong></td><td>Al Bhed Home ruins</td><td>1,400,000</td><td>Medium</td></tr>
+                        <tr><td><strong>Dark Ixion (x2)</strong></td><td>Thunder Plains - NW and Airship agency</td><td>1,200,000 each</td><td>Medium-Hard</td></tr>
+                        <tr><td><strong>Dark Shiva</strong></td><td>Macalania Temple entrance</td><td>1,100,000</td><td>Medium - blocks temple</td></tr>
+                        <tr><td><strong>Dark Bahamut</strong></td><td>Zanarkand Dome entrance</td><td>4,000,000</td><td>Hard - blocks Sun Crest!</td></tr>
+                        <tr><td><strong>Dark Yojimbo (x5)</strong></td><td>Cavern of Stolen Fayth</td><td>1,600,000 each</td><td>Hard - must fight 5 times</td></tr>
+                        <tr><td><strong>Dark Anima</strong></td><td>Mt. Gagazet after Seymour Flux area</td><td>8,000,000</td><td>Very Hard</td></tr>
+                        <tr><td><strong>Dark Magus Sisters</strong></td><td>Mushroom Rock Road</td><td>Sandy: 2.5M, Cindy: 3M, Mindy: 2M</td><td>Very Hard - fight all three</td></tr>
+                    </table>
+                </div>
+
+                <h3>Preparation for Dark Aeons</h3>
+                <h4>Recommended Stats:</h4>
+                <ul>
+                    <li><strong>Early Dark Aeons (Valefor-Shiva):</strong> 175+ in key stats</li>
+                    <li><strong>Dark Bahamut onward:</strong> 225+ in all combat stats</li>
+                    <li><strong>Penance:</strong> 255 in Strength, Defense, Magic Defense; 170+ Agility; 114+ Luck</li>
+                </ul>
+
+                <h4>Recommended Armor:</h4>
+                <ul>
+                    <li><strong>Auto-Haste</strong> (mandatory)</li>
+                    <li><strong>Auto-Phoenix</strong> (essential for recovering from deaths)</li>
+                    <li><strong>Auto-Protect</strong> (halves physical damage)</li>
+                    <li><strong>Stoneproof or Ribbon</strong> (prevents petrification instant death)</li>
+                </ul>
+
+                <h4>Battle Strategy:</h4>
+                <ol>
+                    <li>Use Auron with First Strike weapon to always go first</li>
+                    <li>Swap to Rikku and use Ultra NulAll (Healing Spring + Healing Spring)</li>
+                    <li>Spam Quick Hit for damage</li>
+                    <li>Use Aeons as shields for enemy Overdrives</li>
+                    <li>Wakka's Attack Reels and Tidus's Blitz Ace for massive damage</li>
+                </ol>
+
+                <h3>Penance - The Ultimate Superboss</h3>
+                <div class="warning-box">
+                    <strong>Stats:</strong> 12,000,000 HP (body), 500,000 HP per arm (regenerates)<br>
+                    <strong>Location:</strong> Airship destination after defeating all Dark Aeons
+                </div>
+
+                <h4>Key Attacks:</h4>
+                <ul>
+                    <li><strong>Obliteration:</strong> Physical damage to all + Slow (Phase 1)</li>
+                    <li><strong>Immolation:</strong> Physical damage + MP drain + Armor/Mental Break (Phase 2)</li>
+                    <li><strong>Judgment Day:</strong> 99,999 damage to all + 999 MP drain (if both arms alive after 3M damage)</li>
+                </ul>
+
+                <h4>Strategy:</h4>
+                <ul>
+                    <li><strong>Armor:</strong> Auto-Haste, Auto-Protect, Auto-Potion (with X-Potions only), Defense+20%</li>
+                    <li>Start with Three Stars (infinite MP) and Ultra NulAll</li>
+                    <li>NEVER let both arms take a turn - focus them down with Quick Hit</li>
+                    <li>Dispel Mighty Guard when Right Arm casts it</li>
+                    <li>Dispel your own characters after Immolation (removes Armor Break)</li>
+                    <li>With maxed stats and proper setup, Auto-Regen can outheal damage</li>
+                </ul>
+
+                <div class="gold-box">
+                    <strong>Yojimbo Cheese:</strong> Zanmato CAN one-shot Penance and all Dark Aeons!
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Monster Arena & Bestiary -->
+        <section class="section" id="monster-arena">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">8</span>Monster Arena & Bestiary</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>The Monster Arena in the Calm Lands is the key to endgame power. Capture fiends using special Capture weapons to unlock powerful bosses, earn rare items, and grind stats for superboss fights. This comprehensive bestiary covers all 13 capture areas, Area Conquest, Species Conquest, and Original Creations.</p>
+
+                <h3>Getting Started</h3>
+                <div class="info-box">
+                    <strong>Capture Mechanics:</strong>
+                    <ul>
+                        <li>Buy Capture weapons from the Arena owner (9,075 gil each - available for Tidus, Wakka, Auron, Kimahri)</li>
+                        <li>The <strong>killing blow</strong> must be dealt with the Capture weapon equipped</li>
+                        <li>Magic, Overdrives, and special abilities do NOT capture - only regular attacks and skills</li>
+                        <li>Capture all 9 Calm Lands fiends first to unlock the Arena</li>
+                        <li>You can capture up to 10 of each fiend</li>
+                        <li>Machina and human enemies cannot be captured</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Pro Tip:</strong> Customize Capture + Deathstrike on the same weapon. Instant-kill captures make farming much faster! Get Farplane Wind from Calm Lands completion reward.
+                </div>
+
+                <h3>Complete Capture Checklist by Area</h3>
+
+                <h4>Besaid (3 Fiends) → Unlocks Stratoavis</h4>
+                <p><strong>Reward:</strong> 99x Stamina Tonic</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Dingo</td><td>Wolf</td><td>Beach and village paths</td></tr>
+                        <tr><td>Condor</td><td>Bird</td><td>Flying enemy, common</td></tr>
+                        <tr><td>Water Flan</td><td>Flan</td><td>Weak to Lightning</td></tr>
+                    </table>
+                </div>
+
+                <h4>Kilika (4 Fiends) → Unlocks Malboro Menace</h4>
+                <p><strong>Reward:</strong> 99x Poison Fang</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Dinonix</td><td>Reptile</td><td>Forest paths</td></tr>
+                        <tr><td>Killer Bee</td><td>Wasp</td><td>Flying, poisonous</td></tr>
+                        <tr><td>Yellow Element</td><td>Element</td><td>Lightning elemental</td></tr>
+                        <tr><td>Ragora</td><td>Plant</td><td>Forest only</td></tr>
+                    </table>
+                </div>
+
+                <h4>Mi'ihen Highroad (8 Fiends) → Unlocks Kottos</h4>
+                <p><strong>Reward:</strong> 99x Soul Spring</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Mi'ihen Fang</td><td>Wolf</td><td>Common on main road</td></tr>
+                        <tr><td>Ipiria</td><td>Reptile</td><td>Lizard enemy</td></tr>
+                        <tr><td>Floating Eye</td><td>Eye</td><td>Can confuse party</td></tr>
+                        <tr><td>White Element</td><td>Element</td><td>Ice elemental</td></tr>
+                        <tr><td>Raldo</td><td>Helm</td><td>Armored, high defense</td></tr>
+                        <tr><td>Vouivre</td><td>Drake</td><td>Dragon-type</td></tr>
+                        <tr><td>Bomb</td><td>Bomb</td><td>Self-destructs when low HP</td></tr>
+                        <tr><td>Dual Horn</td><td>Ruminant</td><td>Oldroad area only</td></tr>
+                    </table>
+                </div>
+
+                <h4>Mushroom Rock Road (7 Fiends) → Unlocks Coeurlregina</h4>
+                <p><strong>Reward:</strong> 99x Candle of Life</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Raptor</td><td>Reptile</td><td>Fast attacker</td></tr>
+                        <tr><td>Gandarewa</td><td>Imp</td><td>Magic user</td></tr>
+                        <tr><td>Thunder Flan</td><td>Flan</td><td>Absorbs Lightning</td></tr>
+                        <tr><td>Red Element</td><td>Element</td><td>Fire elemental</td></tr>
+                        <tr><td>Lamashtu</td><td>Drake</td><td>Dragon-type</td></tr>
+                        <tr><td>Funguar</td><td>Fungus</td><td>Can inflict status</td></tr>
+                        <tr><td>Garuda</td><td>Roc</td><td>Large flying enemy</td></tr>
+                    </table>
+                </div>
+
+                <h4>Djose Highroad (7 Fiends) → Unlocks Jormungand</h4>
+                <p><strong>Reward:</strong> 99x Petrify Grenade</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Garm</td><td>Wolf</td><td>Wolf-type</td></tr>
+                        <tr><td>Simurgh</td><td>Bird</td><td>Flying</td></tr>
+                        <tr><td>Bite Bug</td><td>Wasp</td><td>Small flying insect</td></tr>
+                        <tr><td>Snow Flan</td><td>Flan</td><td>Absorbs Ice</td></tr>
+                        <tr><td>Bunyip</td><td>Helm</td><td>Armored</td></tr>
+                        <tr><td>Basilisk</td><td>Basilisk</td><td>Can petrify!</td></tr>
+                        <tr><td>Ochu</td><td>Ochu</td><td>Plant-type, rare</td></tr>
+                    </table>
+                </div>
+
+                <h4>Thunder Plains (8 Fiends) → Unlocks Cactuar King</h4>
+                <p><strong>Reward:</strong> 99x Chocobo Wing (Auto-Haste!)</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Melusine</td><td>Reptile</td><td>Serpent enemy</td></tr>
+                        <tr><td>Aerouge</td><td>Imp</td><td>Flying magic user</td></tr>
+                        <tr><td>Buer</td><td>Eye</td><td>Evil eye type</td></tr>
+                        <tr><td>Gold Element</td><td>Element</td><td>Lightning elemental</td></tr>
+                        <tr><td>Kusariqqu</td><td>Drake</td><td>Dragon-type</td></tr>
+                        <tr><td>Larva</td><td>Larva</td><td>Insect-type</td></tr>
+                        <tr><td>Iron Giant</td><td>Iron Giant</td><td>Rare, high HP - near agency</td></tr>
+                        <tr><td>Qactuar</td><td>Cactuar</td><td>Rare! 10,000 Needles attack</td></tr>
+                    </table>
+                </div>
+
+                <h4>Macalania (10 Fiends) → Unlocks Espada</h4>
+                <p><strong>Reward:</strong> 60x Shining Gem</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Snow Wolf</td><td>Wolf</td><td>Near Travel Agency</td></tr>
+                        <tr><td>Iguion</td><td>Reptile</td><td>Woods area</td></tr>
+                        <tr><td>Wasp</td><td>Wasp</td><td>Woods area</td></tr>
+                        <tr><td>Evil Eye</td><td>Eye</td><td>Near Travel Agency</td></tr>
+                        <tr><td>Ice Flan</td><td>Flan</td><td>Near Travel Agency</td></tr>
+                        <tr><td>Blue Element</td><td>Element</td><td>Water elemental</td></tr>
+                        <tr><td>Murussu</td><td>Helm</td><td>Woods area</td></tr>
+                        <tr><td>Mafdet</td><td>Helm</td><td>Near Travel Agency</td></tr>
+                        <tr><td>Xiphos</td><td>Blade</td><td>Woods - sword enemy</td></tr>
+                        <tr><td>Chimera</td><td>Chimera</td><td>Woods - multi-element attacks</td></tr>
+                    </table>
+                </div>
+
+                <h4>Bikanel Desert (6 Fiends) → Unlocks Abyss Worm</h4>
+                <p><strong>Reward:</strong> 99x Shadow Gem</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Sand Wolf</td><td>Wolf</td><td>Common in desert</td></tr>
+                        <tr><td>Alcyone</td><td>Bird</td><td>Flying</td></tr>
+                        <tr><td>Mushussu</td><td>Drake</td><td>Dragon-type</td></tr>
+                        <tr><td>Zu</td><td>Roc</td><td>Large bird, high HP</td></tr>
+                        <tr><td>Sand Worm</td><td>Worm</td><td>Bribe for Winning Formula!</td></tr>
+                        <tr><td>Cactuar</td><td>Cactuar</td><td>Rare! Runs away fast</td></tr>
+                    </table>
+                </div>
+
+                <h4>Calm Lands (9 Fiends) → Unlocks Chimerageist + Opens Arena</h4>
+                <p><strong>Reward:</strong> Nirvana (Yuna's Celestial Weapon) + 60x Farplane Wind</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Skoll</td><td>Wolf</td><td>Common</td></tr>
+                        <tr><td>Nebiros</td><td>Wasp</td><td>Flying insect</td></tr>
+                        <tr><td>Flame Flan</td><td>Flan</td><td>Absorbs Fire</td></tr>
+                        <tr><td>Shred</td><td>Helm</td><td>Armored</td></tr>
+                        <tr><td>Anacondaur</td><td>Basilisk</td><td>Bribe for Healing Spring!</td></tr>
+                        <tr><td>Ogre</td><td>Ogre</td><td>High physical damage</td></tr>
+                        <tr><td>Coeurl</td><td>Coeurl</td><td>Can inflict Confusion</td></tr>
+                        <tr><td>Chimera Brain</td><td>Chimera</td><td>Uses Aqua Breath</td></tr>
+                        <tr><td>Malboro</td><td>Malboro</td><td>Bad Breath - causes ALL statuses!</td></tr>
+                    </table>
+                </div>
+
+                <h4>Cavern of the Stolen Fayth (9 Fiends) → Unlocks Don Tonberry</h4>
+                <p><strong>Reward:</strong> 40x Silver Hourglass</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Yowie</td><td>Reptile</td><td>Lizard-type</td></tr>
+                        <tr><td>Imp</td><td>Imp</td><td>Magic user</td></tr>
+                        <tr><td>Dark Element</td><td>Element</td><td>Shadow elemental</td></tr>
+                        <tr><td>Nidhogg</td><td>Drake</td><td>Dragon-type</td></tr>
+                        <tr><td>Thorn</td><td>Fungus</td><td>Plant-type</td></tr>
+                        <tr><td>Valaha</td><td>Ruminant</td><td>Bull-type</td></tr>
+                        <tr><td>Epaaj</td><td>Blade</td><td>Sword enemy</td></tr>
+                        <tr><td>Ghost</td><td>Revenant</td><td>Bribe for Mega Phoenix!</td></tr>
+                        <tr><td>Tonberry</td><td>Tonberry</td><td>Karma attack - instant kill!</td></tr>
+                    </table>
+                </div>
+
+                <h4>Mt. Gagazet (10 Fiends + 4 Underwater) → Unlocks Catoblepas</h4>
+                <p><strong>Reward:</strong> Blossom Crown (Required for Magus Sisters!)</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Bandersnatch</td><td>Wolf</td><td>Mountain paths</td></tr>
+                        <tr><td>Ahriman</td><td>Eye</td><td>Flying eye</td></tr>
+                        <tr><td>Dark Flan</td><td>Flan</td><td>Absorbs all magic!</td></tr>
+                        <tr><td>Grenade</td><td>Bomb</td><td>Explodes when low HP</td></tr>
+                        <tr><td>Grat</td><td>Plant</td><td>Grass enemy</td></tr>
+                        <tr><td>Grendel</td><td>Ruminant</td><td>Large beast</td></tr>
+                        <tr><td>Bashura</td><td>Ogre</td><td>Two-armed ogre</td></tr>
+                        <tr><td>Mandragora</td><td>Plant</td><td>Can put party to sleep</td></tr>
+                        <tr><td>Behemoth</td><td>Behemoth</td><td>High HP, counters with Meteor</td></tr>
+                        <tr><td>Splasher</td><td>Aquatic</td><td>Underwater only</td></tr>
+                        <tr><td>Achelous</td><td>Aquatic</td><td>Underwater only</td></tr>
+                        <tr><td>Maelspike</td><td>Aquatic</td><td>Underwater only</td></tr>
+                    </table>
+                </div>
+                <div class="warning-box">
+                    <strong>Important:</strong> Mt. Gagazet underwater fiends are required for Shinryu unlock! Capture 2 of each: Splasher, Achelous, Maelspike.
+                </div>
+
+                <h4>Inside Sin (9 Fiends) → Unlocks Abaddon</h4>
+                <p><strong>Reward:</strong> 99x Lunar Curtain</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Exoray</td><td>Fungus</td><td>Mushroom enemy</td></tr>
+                        <tr><td>Wraith</td><td>Revenant</td><td>Ghost-type</td></tr>
+                        <tr><td>Gemini (A)</td><td>Iron Giant</td><td>Blue giant with sword</td></tr>
+                        <tr><td>Gemini (B)</td><td>Iron Giant</td><td>Red giant with club</td></tr>
+                        <tr><td>Demonolith</td><td>Doomstone</td><td>Can petrify with gaze</td></tr>
+                        <tr><td>Great Malboro</td><td>Malboro</td><td>Worse Bad Breath than regular!</td></tr>
+                        <tr><td>Barbatos</td><td>Armor</td><td>Heavy armor enemy</td></tr>
+                        <tr><td>Adamantoise</td><td>Adamantoise</td><td>Steal for Stamina Tablet!</td></tr>
+                        <tr><td>Behemoth King</td><td>Behemoth</td><td>Counters everything with Meteor!</td></tr>
+                    </table>
+                </div>
+
+                <h4>Omega Ruins (13 Fiends) → Unlocks Vorban</h4>
+                <p><strong>Reward:</strong> 99x Designer Wallet (Gillionaire!)</p>
+                <div class="table-container">
+                    <table>
+                        <tr><th>Fiend</th><th>Species Type</th><th>Location Notes</th></tr>
+                        <tr><td>Zaurus</td><td>Reptile</td><td>Dinosaur-type</td></tr>
+                        <tr><td>Floating Death</td><td>Eye</td><td>Death Gaze attack</td></tr>
+                        <tr><td>Black Element</td><td>Element</td><td>Shadow elemental</td></tr>
+                        <tr><td>Halma</td><td>Helm</td><td>Heavily armored</td></tr>
+                        <tr><td>Puroboros</td><td>Bomb</td><td>Self-destructs</td></tr>
+                        <tr><td>Spirit</td><td>Larva</td><td>Magic user</td></tr>
+                        <tr><td>Machea</td><td>Blade</td><td>Bribe for Chocobo Wing!</td></tr>
+                        <tr><td>Master Coeurl</td><td>Coeurl</td><td>Stronger Coeurl</td></tr>
+                        <tr><td>Master Tonberry</td><td>Tonberry</td><td>Karma x3 damage!</td></tr>
+                        <tr><td>Varuna</td><td>Spellspinner</td><td>Magic caster</td></tr>
+                        <tr><td>Demonolith</td><td>Doomstone</td><td>Also counts for Sin</td></tr>
+                        <tr><td>Great Malboro</td><td>Malboro</td><td>Also counts for Sin</td></tr>
+                        <tr><td>Wraith</td><td>Revenant</td><td>Also counts for Sin</td></tr>
+                    </table>
+                </div>
+
+                <h3>Area Conquest Bosses</h3>
+                <p>Unlocked by capturing one of each fiend in an area. Cost: 6,000 gil per fight (8,000 for Don Tonberry).</p>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Boss</th>
+                            <th>Area</th>
+                            <th>HP</th>
+                            <th>Unlock Reward</th>
+                            <th>Drop</th>
+                        </tr>
+                        <tr><td><strong>Stratoavis</strong></td><td>Besaid</td><td>320,000</td><td>99x Stamina Tonic</td><td>Stamina Spring</td></tr>
+                        <tr><td><strong>Malboro Menace</strong></td><td>Kilika</td><td>640,000</td><td>99x Poison Fang</td><td>Mana Tonic</td></tr>
+                        <tr><td><strong>Kottos</strong></td><td>Mi'ihen</td><td>440,000</td><td>99x Soul Spring</td><td>Soul Spring x20</td></tr>
+                        <tr><td><strong>Coeurlregina</strong></td><td>Mushroom Rock</td><td>380,000</td><td>99x Candle of Life</td><td>Farplane Wind</td></tr>
+                        <tr><td><strong>Jormungand</strong></td><td>Djose</td><td>520,000</td><td>99x Petrify Grenade</td><td>Petrify Grenade</td></tr>
+                        <tr><td><strong>Cactuar King</strong></td><td>Thunder Plains</td><td>100,000</td><td>99x Chocobo Wing</td><td>Blessed Gem</td></tr>
+                        <tr><td><strong>Espada</strong></td><td>Macalania</td><td>280,000</td><td>60x Shining Gem</td><td>Rename Card</td></tr>
+                        <tr><td><strong>Abyss Worm</strong></td><td>Bikanel</td><td>480,000</td><td>99x Shadow Gem</td><td>Stamina Tonic</td></tr>
+                        <tr><td><strong>Chimerageist</strong></td><td>Calm Lands</td><td>120,000</td><td>Nirvana + 60x Farplane Wind</td><td>Mana Spring</td></tr>
+                        <tr><td><strong>Don Tonberry</strong></td><td>Stolen Fayth</td><td>480,000</td><td>40x Silver Hourglass</td><td>Farplane Shadow</td></tr>
+                        <tr><td><strong>Catoblepas</strong></td><td>Mt. Gagazet</td><td>550,000</td><td>Blossom Crown</td><td>Three Stars</td></tr>
+                        <tr><td><strong>Abaddon</strong></td><td>Inside Sin</td><td>380,000</td><td>99x Lunar Curtain</td><td>Mana Tablet</td></tr>
+                        <tr><td><strong>Vorban</strong></td><td>Omega Ruins</td><td>630,000</td><td>99x Designer Wallet</td><td>Friend Sphere</td></tr>
+                    </table>
+                </div>
+
+                <div class="gold-box">
+                    <strong>Don Tonberry AP Trick:</strong> Don Tonberry gives AP based on how many enemies a character has killed throughout the game. Equip a Triple AP + Triple Overdrive + Overdrive→AP weapon with Stoic mode. You can earn <strong>millions of AP</strong> per fight!
+                </div>
+
+                <h3>Species Conquest Bosses</h3>
+                <p>Unlocked by capturing a specific number of each fiend in a species type. Cost: 8,000 gil per fight.</p>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Boss</th>
+                            <th>Species</th>
+                            <th>Capture #</th>
+                            <th>HP</th>
+                            <th>Unlock Reward</th>
+                            <th>Drop</th>
+                        </tr>
+                        <tr><td><strong>Fenrir</strong></td><td>Wolf (7 types)</td><td>3 each</td><td>850,000</td><td>99x Chocobo Feather</td><td>Agility Sphere</td></tr>
+                        <tr><td><strong>Ornitholestes</strong></td><td>Reptile (7 types)</td><td>3 each</td><td>800,000</td><td>99x Stamina Spring</td><td>Stamina Spring</td></tr>
+                        <tr><td><strong>Pteryx</strong></td><td>Bird (3 types)</td><td>4 each</td><td>100,000</td><td>99x Mega Phoenix</td><td>Evasion Sphere</td></tr>
+                        <tr><td><strong>Hornet</strong></td><td>Wasp (4 types)</td><td>4 each</td><td>620,000</td><td>60x Mana Tonic</td><td>Mana Tonic</td></tr>
+                        <tr><td><strong>Vidatu</strong></td><td>Imp (3 types)</td><td>4 each</td><td>95,000</td><td>99x Mana Spring</td><td>MP Sphere</td></tr>
+                        <tr><td><strong>One-Eye</strong></td><td>Eye (5 types)</td><td>4 each</td><td>150,000</td><td>60x Stamina Tablet</td><td>Magic Def Sphere</td></tr>
+                        <tr><td><strong>Jumbo Flan</strong></td><td>Flan (6 types)</td><td>3 each</td><td>1,300,000</td><td>60x Twin Stars</td><td>Twin Stars</td></tr>
+                        <tr><td><strong>Nega Elemental</strong></td><td>Element (7 types)</td><td>3 each</td><td>1,300,000</td><td>99x Star Curtain</td><td>Star Curtain</td></tr>
+                        <tr><td><strong>Tanket</strong></td><td>Helm (6 types)</td><td>3 each</td><td>900,000</td><td>99x Gold Hourglass</td><td>HP Sphere</td></tr>
+                        <tr><td><strong>Fafnir</strong></td><td>Drake (5 types)</td><td>4 each</td><td>1,100,000</td><td>99x Purifying Salt</td><td>Strength Sphere</td></tr>
+                        <tr><td><strong>Sleep Sprout</strong></td><td>Fungus (3 types)</td><td>5 each</td><td>98,000</td><td>99x Healing Spring</td><td>Teleport Sphere</td></tr>
+                        <tr><td><strong>Bomb King</strong></td><td>Bomb (3 types)</td><td>5 each</td><td>480,000</td><td>60x Turbo Ether</td><td>Turbo Ether</td></tr>
+                        <tr><td><strong>Juggernaut</strong></td><td>Ruminant (3 types)</td><td>5 each</td><td>1,200,000</td><td>99x Light Curtain</td><td>Strength Sphere</td></tr>
+                        <tr><td><strong>Ironclad</strong></td><td>Iron Giant (3 types)</td><td>10 each</td><td>2,000,000</td><td>60x Mana Tablet</td><td>HP Sphere</td></tr>
+                    </table>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Best Species Farming:</strong>
+                    <ul>
+                        <li><strong>One-Eye:</strong> Drops Triple AP weapons! Farm these for AP grinding setups</li>
+                        <li><strong>Fafnir/Juggernaut:</strong> Drop Strength Spheres for stat maxing</li>
+                        <li><strong>Sleep Sprout:</strong> Lowest HP creation - fastest Dark Matter farming</li>
+                        <li><strong>Kottos:</strong> 40x Soul Spring per fight with overkill - sphere conversion</li>
+                    </ul>
+                </div>
+
+                <h3>Original Creations (Ultimate Bosses)</h3>
+                <p>The hardest Arena creations (but still easier than Dark Aeons). Cost: 15,000 gil per fight (25,000 for Nemesis).</p>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Boss</th>
+                            <th>HP</th>
+                            <th>Unlock Condition</th>
+                            <th>Unlock Reward</th>
+                            <th>Drop</th>
+                        </tr>
+                        <tr><td><strong>Earth Eater</strong></td><td>1,300,000</td><td>Unlock 2 Area Conquest</td><td>60x Three Stars</td><td>Fortune Sphere</td></tr>
+                        <tr><td><strong>Greater Sphere</strong></td><td>1,500,000</td><td>Unlock 2 Species Conquest</td><td>60x Supreme Gem</td><td>Luck Sphere</td></tr>
+                        <tr><td><strong>Catastrophe</strong></td><td>2,200,000</td><td>Unlock 6 Area Conquest</td><td>99x Door to Tomorrow</td><td>Door to Tomorrow</td></tr>
+                        <tr><td><strong>Th'uban</strong></td><td>3,000,000</td><td>Unlock 6 Species Conquest</td><td>99x Gambler's Spirit</td><td>Underdog's Secret</td></tr>
+                        <tr><td><strong>Neslug</strong></td><td>4,000,000</td><td>Capture 1 of each fiend in Spira</td><td>99x Winning Formula</td><td>Pendulum</td></tr>
+                        <tr><td><strong>Ultima Buster</strong></td><td>5,000,000</td><td>Capture 5 of each fiend in Spira</td><td>99x Dark Matter</td><td>Winning Formula</td></tr>
+                        <tr><td><strong>Shinryu</strong></td><td>2,000,000</td><td>Capture 2 of each underwater fiend (Mt. Gagazet)</td><td>30x Megalixir</td><td>Wings to Discovery</td></tr>
+                        <tr><td><strong>Nemesis</strong></td><td>10,000,000</td><td>Capture 10 of ALL fiends + defeat ALL other creations</td><td>10x Master Sphere</td><td>Warp Sphere</td></tr>
+                    </table>
+                </div>
+
+                <h4>Original Creation Strategies</h4>
+
+                <div class="info-box">
+                    <strong>Earth Eater (Fortune Sphere Farming):</strong> Like Chocobo Eater - knock it down with 3+ attacks then deal damage while it's weak. When standing, has high defense. Use Anima's Oblivion for Overkill (99,999 damage needed). Drops 2 Fortune Spheres with Overkill!
+                </div>
+
+                <div class="info-box">
+                    <strong>Greater Sphere (Luck Sphere Farming):</strong> Shifts weakness when hit by its current weakness. Counters Overdrives with Hydraulic Press (15/16 max HP damage). Counter other attacks with Ultima. Use Quick Hit spam. Overkill for 2 Luck Spheres!
+                </div>
+
+                <div class="warning-box">
+                    <strong>Shinryu:</strong> Underwater fight - Tidus, Wakka, Rikku only! Uses Eraser which petrifies and IGNORES Stoneproof/Ribbon. Kill fast with Quick Hit or use Trio of 9999 before it acts.
+                </div>
+
+                <div class="warning-box">
+                    <strong>Nemesis:</strong> Counters all Attacks, Magic, and Overdrives with Ultima! Only use Quick Hit. Armageddon deals 99,999 to entire party (unavoidable). Uses Ethereal Cannon and Ultra Spark in rotation. Need max stats (255 Strength, Defense, Magic Defense; 170+ Agility; 114+ Luck).
+                </div>
+
+                <h3>Key Rewards Summary</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Goal</th>
+                            <th>Reward</th>
+                            <th>Why It Matters</th>
+                        </tr>
+                        <tr><td>Complete Calm Lands</td><td>Nirvana + opens Arena</td><td>Yuna's Celestial Weapon</td></tr>
+                        <tr><td>Complete Mt. Gagazet</td><td>Blossom Crown</td><td>Required for Magus Sisters</td></tr>
+                        <tr><td>Unlock 10 Area/Species</td><td>Mars Sigil</td><td>Powers up Auron's Masamune</td></tr>
+                        <tr><td>Unlock Fafnir</td><td>99x Purifying Salt</td><td>No Encounters armor</td></tr>
+                        <tr><td>Unlock Fenrir</td><td>99x Chocobo Feather</td><td>Auto-Haste (lesser version)</td></tr>
+                        <tr><td>Unlock Cactuar King</td><td>99x Chocobo Wing</td><td>Auto-Haste (full version)</td></tr>
+                        <tr><td>Unlock Ultima Buster</td><td>99x Dark Matter</td><td>Ribbon customization</td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Overdrives -->
+        <section class="section" id="overdrives">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">9</span>Overdrives</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>Overdrives are powerful special attacks that charge based on your selected Overdrive Mode. Each character has unique Overdrives with different unlock methods.</p>
+
+                <h3>Best Overdrives Ranked</h3>
+                <ol>
+                    <li><strong>Attack Reels (Wakka):</strong> 12 hits with full reels - can deal 1.2M+ damage</li>
+                    <li><strong>Mix (Rikku):</strong> Trio of 9999, Ultra NulAll, and many utility combos</li>
+                    <li><strong>Blitz Ace (Tidus):</strong> 9 hits - excellent damage dealer</li>
+                    <li><strong>Oblivion (Anima):</strong> 16 hits, up to 1.6M damage potential</li>
+                    <li><strong>Banishing Blade (Auron):</strong> Full Break effect on all enemies</li>
+                </ol>
+
+                <h3>Best Overdrive Modes</h3>
+                <ul>
+                    <li><strong>Stoic:</strong> Charge when taking damage (default) - good for tanky setups</li>
+                    <li><strong>Comrade:</strong> Charge when allies take damage - great for reserve characters</li>
+                    <li><strong>Slayer:</strong> Charge when killing enemies - best for grinding</li>
+                    <li><strong>Warrior:</strong> Charge when dealing damage - good for attackers</li>
+                </ul>
+
+                <h3>Key Rikku Mix Combinations</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Mix Name</th>
+                            <th>Recipe</th>
+                            <th>Effect</th>
+                        </tr>
+                        <tr><td><strong>Trio of 9999</strong></td><td>Door to Tomorrow + Gambler's Spirit</td><td>All attacks deal 9999 damage</td></tr>
+                        <tr><td><strong>Ultra NulAll</strong></td><td>Healing Spring + Healing Spring</td><td>All stats +5, Shell, Protect to party</td></tr>
+                        <tr><td><strong>Hyper Mighty G</strong></td><td>Healing Spring + Wings to Discovery</td><td>Protect, Shell, Haste, Regen to party</td></tr>
+                        <tr><td><strong>Mega-Vitality</strong></td><td>Soul Spring + Door to Tomorrow</td><td>Doubles max HP temporarily</td></tr>
+                        <tr><td><strong>Final Elixir</strong></td><td>Megalixir + Elixir</td><td>Full HP/MP restore + revive all</td></tr>
+                        <tr><td><strong>Sunburst</strong></td><td>Shining Gem + Supreme Gem</td><td>9999+ non-elemental damage to all</td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Items & Customization -->
+        <section class="section" id="items">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">10</span>Items & Equipment Customization</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>Equipment customization is unlocked after Rikku joins the party in Guadosalam. You can add auto-abilities to weapons and armor using specific items, provided the equipment has empty slots. Once added, abilities cannot be removed, so plan carefully!</p>
+
+                <div class="info-box">
+                    <strong>Customization Basics:</strong>
+                    <ul>
+                        <li>Equipment can have 1-4 auto-ability slots</li>
+                        <li>Celestial Weapons and Brotherhood cannot be customized</li>
+                        <li>Once an ability is added, it's permanent</li>
+                        <li>Items are also used for Rikku's Mix and teaching Aeon abilities</li>
+                    </ul>
+                </div>
+
+                <h3>Best Weapon Auto-Abilities</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Ability</th>
+                            <th>Effect</th>
+                            <th>Items Required</th>
+                            <th>How to Farm Items</th>
+                        </tr>
+                        <tr><td><strong>Break Damage Limit</strong></td><td>Allows damage up to 99,999</td><td>60x Dark Matter</td><td>Monster Arena creations (rare drop), Dark Aeons (common drop), Ultima Buster unlock reward (99x)</td></tr>
+                        <tr><td><strong>Triple Overdrive</strong></td><td>Overdrive gauge fills 3x faster</td><td>30x Winning Formula</td><td>One-Eye drops weapons with this; Sand Worm bribe (900,000 gil = 15x)</td></tr>
+                        <tr><td><strong>Triple AP</strong></td><td>Triples AP earned from battles</td><td>50x Wings to Discovery</td><td>Shinryu drops (Monster Arena), Malboro bribe (540,000 gil = 4x), Remiem Temple race (30x)</td></tr>
+                        <tr><td><strong>One MP Cost</strong></td><td>All spells cost only 1 MP</td><td>20x Three Stars</td><td>Remiem Temple chocobo race (5 chests = 60x), One-Eye drops</td></tr>
+                        <tr><td><strong>Overdrive → AP</strong></td><td>Converts overdrive to AP instead</td><td>10x Door to Tomorrow</td><td>Mech Leader bribe (74,000 gil = 2x), Catastrophe drops</td></tr>
+                        <tr><td><strong>Gillionaire</strong></td><td>Doubles gil earned after battle</td><td>30x Designer Wallet</td><td>Don Tonberry or Omega Ruins captures</td></tr>
+                        <tr><td><strong>First Strike</strong></td><td>Always act first in battle</td><td>1x Return Sphere</td><td>Steal from Dark Flan, Mech Defender, or Sanctuary Keeper</td></tr>
+                        <tr><td><strong>Capture</strong></td><td>Capture monsters on killing blow</td><td>Not customizable</td><td>Buy Capture weapons from Monster Arena only</td></tr>
+                    </table>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Ultimate AP Farming Weapon:</strong> Combine Triple AP + Triple Overdrive + Overdrive → AP on one weapon. Set Overdrive Mode to Stoic. Fight Don Tonberry in Monster Arena - with this setup you can gain millions of AP per fight!
+                </div>
+
+                <h3>Best Armor Auto-Abilities</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Ability</th>
+                            <th>Effect</th>
+                            <th>Items Required</th>
+                            <th>How to Farm Items</th>
+                        </tr>
+                        <tr><td><strong>Ribbon</strong></td><td>Immunity to ALL status ailments (except Death)</td><td>99x Dark Matter</td><td>Monster Arena creations, Dark Aeons, Ultima Buster unlock</td></tr>
+                        <tr><td><strong>Auto-Haste</strong></td><td>Permanent Haste, immune to Slow</td><td>80x Chocobo Wing</td><td>Machea bribe (360,000 gil = 60x), Cactuar King steal (2x), Wolf unlock (99x Chocobo Feather for lesser Auto-Haste)</td></tr>
+                        <tr><td><strong>Auto-Phoenix</strong></td><td>Auto-revive KO'd allies with Phoenix Down</td><td>20x Mega Phoenix</td><td>Alcyone bribe (114,000 gil = 16x), Ghost bribe (199,980 gil = 38x)</td></tr>
+                        <tr><td><strong>Auto-Protect</strong></td><td>Permanent Protect, cannot be dispelled</td><td>70x Light Curtain</td><td>Iron Giant bribe (1,180,000 gil = 20x), Larva bribe (119,200 gil = 8x)</td></tr>
+                        <tr><td><strong>Break HP Limit</strong></td><td>Max HP can reach 99,999</td><td>30x Wings to Discovery</td><td>See above - Shinryu, Malboro bribe, Remiem Temple</td></tr>
+                        <tr><td><strong>Auto-Potion</strong></td><td>Auto-use Potion when damaged</td><td>4x Stamina Tablet</td><td>Shop (Calm Lands, etc.) or Adamantoise steal</td></tr>
+                        <tr><td><strong>No Encounters</strong></td><td>Prevents random encounters</td><td>30x Purifying Salt</td><td>Drake capture reward (99x), Fallen Monk steal</td></tr>
+                        <tr><td><strong>Stoneproof</strong></td><td>Immunity to Petrification</td><td>20x Soft</td><td>Shop purchase, various enemy drops</td></tr>
+                    </table>
+                </div>
+
+                <div class="warning-box">
+                    <strong>Celestial vs Custom Weapons:</strong> Celestial Weapons have "Ignore Defense" which makes them deal significantly more damage than custom weapons (up to 60% more against high-defense enemies). For raw damage, always use powered-up Celestial Weapons. Custom weapons are best for utility (Capture, farming builds).
+                </div>
+
+                <h3>Recommended Endgame Armor Build</h3>
+                <div class="gold-box">
+                    <strong>Ultimate Superboss Armor:</strong>
+                    <ul>
+                        <li><strong>Auto-Haste</strong> - Mandatory for turn advantage</li>
+                        <li><strong>Auto-Phoenix</strong> - Recovery from one-shots</li>
+                        <li><strong>Auto-Protect</strong> - Halves physical damage</li>
+                        <li><strong>Ribbon</strong> OR <strong>Defense +20%</strong> - Status immunity or extra survivability</li>
+                    </ul>
+                </div>
+
+                <h3>Key Items for Mix & Customization</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Battle Use</th>
+                            <th>Best Farming Method</th>
+                        </tr>
+                        <tr><td><strong>Dark Matter</strong></td><td>Major damage + Full Break to all enemies</td><td>Sleep Sprout (lowest HP Arena creation), Dark Aeon common drops</td></tr>
+                        <tr><td><strong>Wings to Discovery</strong></td><td>Teaches Aeons abilities</td><td>Shinryu (87% drop rate), Malboro bribe</td></tr>
+                        <tr><td><strong>Chocobo Wing</strong></td><td>Hastega on party</td><td>Machea bribe, Cactuar King steal x2</td></tr>
+                        <tr><td><strong>Three Stars</strong></td><td>Zero MP cost to all party</td><td>Remiem Temple race (60x for 5 chests)</td></tr>
+                        <tr><td><strong>Door to Tomorrow</strong></td><td>Used in Trio of 9999 Mix</td><td>Mech Leader bribe, Catastrophe drops</td></tr>
+                        <tr><td><strong>Gambler's Spirit</strong></td><td>Used in Trio of 9999 Mix</td><td>Land Worm bribe (594,000 gil = 20x)</td></tr>
+                        <tr><td><strong>Healing Spring</strong></td><td>Regen on party, Ultra NulAll mix</td><td>Anacondaur bribe (214,000 gil = 20x)</td></tr>
+                        <tr><td><strong>Mega Phoenix</strong></td><td>Revive all KO'd allies</td><td>Ghost bribe, Pteryx steal</td></tr>
+                        <tr><td><strong>Purifying Salt</strong></td><td>Damage + Dispel enemy</td><td>Drake capture reward (99x)</td></tr>
+                    </table>
+                </div>
+
+                <h3>Status-Touch vs Status-Strike</h3>
+                <p>Weapons can have status-inflicting abilities:</p>
+                <ul>
+                    <li><strong>-Touch abilities:</strong> 50% chance to inflict status</li>
+                    <li><strong>-Strike abilities:</strong> 100% chance to inflict status</li>
+                    <li><strong>Both together:</strong> 150% chance (overcomes resistance)</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Pro Tip:</strong> Customize the -Touch version first, then -Strike. This gives you both abilities on one weapon for maximum infliction chance!
+                </div>
+
+                <h3>Elemental Customization</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Element</th>
+                            <th>Weapon Ability</th>
+                            <th>Items</th>
+                            <th>Armor Ward</th>
+                            <th>Items</th>
+                        </tr>
+                        <tr><td>Fire</td><td>Firestrike</td><td>4x Bomb Core</td><td>Fire Ward</td><td>4x Bomb Fragment</td></tr>
+                        <tr><td>Ice</td><td>Icestrike</td><td>4x Arctic Wind</td><td>Ice Ward</td><td>4x Antarctic Wind</td></tr>
+                        <tr><td>Lightning</td><td>Lightningstrike</td><td>4x Lightning Marble</td><td>Lightning Ward</td><td>4x Electro Marble</td></tr>
+                        <tr><td>Water</td><td>Waterstrike</td><td>4x Dragon Scale</td><td>Water Ward</td><td>4x Fish Scale</td></tr>
+                    </table>
+                </div>
+
+                <h3>Gil Farming for Bribes</h3>
+                <div class="info-box">
+                    <strong>Fast Gil Method:</strong> In Omega Ruins, encounter Mimic (treasure chest enemy). Steal from it - if you're lucky you get the real Mimic. With Gillionaire equipped, defeating Mimic yields <strong>100,000 gil</strong> (50,000 without). This is the fastest repeatable gil source in the game.
+                </div>
+
+                <h3>Aeon Ability Teaching</h3>
+                <p>Items can teach Aeons new abilities. Key abilities to teach:</p>
+                <ul>
+                    <li><strong>Haste/Hastega:</strong> 10x Chocobo Feather / 30x Chocobo Wing</li>
+                    <li><strong>Curaga:</strong> 60x Healing Spring</li>
+                    <li><strong>Holy:</strong> 60x Blessed Gem</li>
+                    <li><strong>Flare:</strong> 60x Shining Gem</li>
+                    <li><strong>Ultima:</strong> 99x Supreme Gem</li>
+                    <li><strong>Doublecast:</strong> 5x Three Stars</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 11: Achievement Tracker -->
+        <section class="section" id="achievements">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">11</span>Steam Achievement Tracker</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>Track your FFX achievement progress! Since Steam combines FFX and X-2 achievements, this tracker focuses only on FFX. Your progress is saved locally in your browser.</p>
+
+                <div class="achievement-controls">
+                    <div class="achievement-stats">
+                        <div class="stat-box">
+                            <span class="stat-number" id="achievementCount">0</span>
+                            <span class="stat-label">/ 34 Complete</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number" id="achievementPercent">0%</span>
+                            <span class="stat-label">Progress</span>
+                        </div>
+                    </div>
+                    <div class="achievement-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="incomplete">Incomplete</button>
+                        <button class="filter-btn" data-filter="complete">Complete</button>
+                        <button class="reset-btn" onclick="resetAchievements()">Reset All</button>
+                    </div>
+                </div>
+
+                <div class="achievement-progress-bar">
+                    <div class="achievement-progress-fill" id="achievementProgressBar"></div>
+                </div>
+
+                <h3>Story Achievements (Unmissable)</h3>
+                <div class="achievement-category" data-category="story">
+                    <div class="achievement-item" data-id="the-right-thing">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('the-right-thing')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">The Right Thing</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Clear the Besaid Cloister of Trials</p>
+                            <div class="achievement-guide">Automatically obtained during story progression in Besaid Temple.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="all-together">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('all-together')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">All Together</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">All party members come together</p>
+                            <div class="achievement-guide">Automatically obtained when Rikku joins after crossing the Moonflow.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="heartstrings">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('heartstrings')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Heartstrings</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">View the "Underwater Date" scene</p>
+                            <div class="achievement-guide">Automatically triggers in Macalania Woods after leaving Bevelle. The famous lake scene with Tidus and Yuna.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="overcoming-the-past">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('overcoming-the-past')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Overcoming the Past</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Yunalesca</p>
+                            <div class="achievement-guide">Story boss in Zanarkand Ruins. Tip: Bring Zombie Ward armor or Holy Water - she uses Mega Death which kills non-Zombie party members!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="destination-of-hatred">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('destination-of-hatred')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">The Destination of Hatred</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Seymour Omnis</p>
+                            <div class="achievement-guide">Final Seymour fight inside Sin. He cycles through elements - use NulBlaze/NulFrost/NulShock/NulTide or Shell to survive.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="eternal-calm">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('eternal-calm')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">The Eternal Calm</span>
+                                <span class="achievement-tier gold">Gold</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Yu Yevon and complete the game</p>
+                            <div class="achievement-guide">Final boss. Yu Yevon auto-casts Auto-Life on your party, so you can't lose. Just attack and don't petrify yourself!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Aeon Achievements</h3>
+                <div class="achievement-category" data-category="aeons">
+                    <div class="achievement-item" data-id="feel-the-pain">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('feel-the-pain')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Feel the Pain</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Obtain Anima</p>
+                            <div class="achievement-guide"><strong>Requirements:</strong> ALL Destruction Sphere treasures from: Besaid, Kilika, Djose, Macalania, Bevelle, Zanarkand. Then go to Baaj Temple (Airship: X=11-16, Y=57-63). <span class="warning-text">WARNING: Dark Aeons can block temples!</span></div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="its-all-about-money">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('its-all-about-money')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">It's All About the Money</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Obtain Yojimbo</p>
+                            <div class="achievement-guide">Found in Cavern of the Stolen Fayth (Calm Lands gorge). Negotiate: Choose "To defeat powerful enemies" and offer half his price +1 gil.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="delta-attack">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('delta-attack')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Delta Attack!</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Obtain Magus Sisters</p>
+                            <div class="achievement-guide"><strong>Requirements:</strong> Have Yojimbo + Anima. Get Flower Scepter (defeat Belgemine's Bahamut). Get Blossom Crown (capture all Mt. Gagazet fiends). Go to Remiem Temple.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="summon-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('summon-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Summon Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Obtain all Aeons</p>
+                            <div class="achievement-guide">Obtain all 8 Aeons: Valefor, Ifrit, Ixion, Shiva, Bahamut (story) + Yojimbo, Anima, Magus Sisters (optional).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Celestial Weapon Achievements</h3>
+                <div class="achievement-category" data-category="celestial">
+                    <div class="achievement-item" data-id="weapon-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('weapon-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Weapon Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Obtain all Celestial Weapons</p>
+                            <div class="achievement-guide">Fully power up all 7 Celestial Weapons. Requires getting each weapon + its Crest + its Sigil. See Section 4 for full details.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="chocobo-rider">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('chocobo-rider')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Chocobo Rider</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Get 0:0:0 in the Catcher Chocobo race</p>
+                            <div class="achievement-guide"><strong>For Sun Sigil (Tidus).</strong> Balloons = -3 sec, Birds = +3 sec. Need ~12-13 balloons and 0-1 birds. Tip: Lose twice first - balloons spawn better!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="lightning-dancer">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('lightning-dancer')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Lightning Dancer</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Dodge 200 lightning bolts and get the reward</p>
+                            <div class="achievement-guide"><strong>For Venus Sigil (Lulu).</strong> Find the crater in southern Thunder Plains for predictable strikes. Press X when screen flashes. Use No Encounters armor. DON'T save or leave - resets count!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="chocobo-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('chocobo-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Chocobo Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Get 5 chests in Remiem Temple race</p>
+                            <div class="achievement-guide">Race at Remiem Temple (Calm Lands). Open all 5 chests while still winning. Rewards include 30x Wings to Discovery and 60x Three Stars!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="chocobo-license">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('chocobo-license')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Chocobo License</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Complete all chocobo training exercises</p>
+                            <div class="achievement-guide">Complete all 4 chocobo training modes in Calm Lands: Wobbly Chocobo, Dodger Chocobo, Hyper Dodger Chocobo, Catcher Chocobo.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Blitzball Achievements</h3>
+                <div class="achievement-category" data-category="blitzball">
+                    <div class="achievement-item" data-id="teamwork">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('teamwork')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Teamwork!</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Win a Blitzball match</p>
+                            <div class="achievement-guide">Win any Blitzball match. Easiest after recruiting better players like Brother (fastest in game) and Nimrook (best goalie).</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="show-off">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('show-off')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Show Off!</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Win a Blitzball tournament</p>
+                            <div class="achievement-guide">Win a tournament (3 matches). Use Jecht Shot to eliminate 2 defenders per shot. Tournaments reset prizes - exit/re-enter to re-roll rewards!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="striker">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('striker')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Striker</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Learn the Jecht Shot</p>
+                            <div class="achievement-guide">On S.S. Winno (Kilika to Luca). SAVE before the blitzball on deck! Hit D-pad + X toward appearing text 11 times. Missed it? Return via airship later.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="blitzball-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('blitzball-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Blitzball Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Unlock all of Wakka's slot reels</p>
+                            <div class="achievement-guide"><strong>Attack Reels:</strong> Tournament 1st. <strong>Status Reels:</strong> League 1st. <strong>Auroch Reels:</strong> Tournament after 450+ battles. Exit/re-enter to re-roll prizes.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Sphere Grid & Combat Achievements</h3>
+                <div class="achievement-category" data-category="combat">
+                    <div class="achievement-item" data-id="power-strike">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('power-strike')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Power Strike</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Deal 9,999+ damage in one attack</p>
+                            <div class="achievement-guide">Level up Auron or use any Celestial Weapon. Easy to get mid-game with decent Strength stats.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="mega-strike">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('mega-strike')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Mega Strike</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Deal 99,999 damage in one attack</p>
+                            <div class="achievement-guide">Requires Break Damage Limit (Celestial Weapon or 60x Dark Matter). Max Strength (255) and use Quick Hit or Attack Reels against low-defense enemy.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="sphere-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('sphere-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Sphere Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Complete entire Sphere Grid for one character</p>
+                            <div class="achievement-guide">ALL nodes must be activated including empty ones. Use Clear Spheres + stat spheres to fill empty nodes. Don Tonberry AP farming recommended.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="perfect-sphere-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('perfect-sphere-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Perfect Sphere Master</span>
+                                <span class="achievement-tier gold">Gold</span>
+                            </div>
+                            <p class="achievement-desc">Complete Sphere Grid for ALL characters</p>
+                            <div class="achievement-guide">ALL 7 characters must have ALL nodes activated. This takes 50+ hours of grinding. Use Don Tonberry + Triple AP weapon setup.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="learning">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('learning')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Learning!</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Learn all Ronso Rage abilities</p>
+                            <div class="achievement-guide">Use Lancet with Kimahri on specific enemies: Fire Breath (Dual Horn), Seed Cannon (Ragora), Self-Destruct (Bomb), Aqua Breath (Chimera), Stone Breath (Anacondaur/Basilisk), Thrust Kick (YKT-63), Doom (Ghost), White Wind (Dark Flan), Bad Breath (Malboro), Mighty Guard (Behemoth), Nova (Omega Weapon/Nemesis).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Collection Achievements</h3>
+                <div class="achievement-category" data-category="collection">
+                    <div class="achievement-item" data-id="speaking-in-tongues">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('speaking-in-tongues')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Speaking in Tongues</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Find 1 Al Bhed Primer</p>
+                            <div class="achievement-guide">First one is in Al Bhed Salvage Ship at game start. Easy to get naturally.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="master-linguist">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('master-linguist')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Master Linguist</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Find all 26 Al Bhed Primers</p>
+                            <div class="achievement-guide"><span class="warning-text">MISSABLE!</span> Some are in one-time areas: Home (4 primers), Bevelle (1 primer). Compilation spheres in Sanubia can recover missed ones IF you have a previous save with them.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="messenger-from-past">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('messenger-from-past')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Messenger from the Past</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Collect all Jecht Spheres</p>
+                            <div class="achievement-guide">10 Jecht Spheres total. First available after defeating Spherimorph. Locations: Macalania Woods (x2), Besaid, S.S. Liki, Luca, Mi'ihen (x2), Moonflow, Thunder Plains, Mt. Gagazet.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="theater-enthusiast">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('theater-enthusiast')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Theater Enthusiast</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Buy all spheres at Luca Theater</p>
+                            <div class="achievement-guide">Costs ~426,000 gil total. 50 music spheres (2,000 each) + 68 movie spheres (5,000 each) + 3 special music (40,000 from left NPC). Best done late-game with Gillionaire.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="talent-for-acquisition">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('talent-for-acquisition')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">A Talent for Acquisition</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Steal 200 times with Rikku</p>
+                            <div class="achievement-guide">Use Steal or Mug 200 times. Counts even if steal fails! Grind on weak enemies or during Monster Arena capturing.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="under-the-table">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('under-the-table')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Under the Table</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Spend 100,000+ gil on bribes</p>
+                            <div class="achievement-guide">Cumulative total. Best done while farming: Machea (Chocobo Wings), Malboro (Wings to Discovery), Ghost (Mega Phoenix).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Superboss Achievements</h3>
+                <div class="achievement-category" data-category="superboss">
+                    <div class="achievement-item" data-id="overcoming-nemesis">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('overcoming-nemesis')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Overcoming the Nemesis</span>
+                                <span class="achievement-tier gold">Gold</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Nemesis</p>
+                            <div class="achievement-guide"><strong>Requirements:</strong> Capture 10 of every fiend + defeat ALL other Monster Arena creations. Nemesis has 10M HP and counters everything except Quick Hit with Ultima. Need max stats!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="perseverance">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('perseverance')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Perseverance</span>
+                                <span class="achievement-tier gold">Gold</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Penance</p>
+                            <div class="achievement-guide"><strong>Requirements:</strong> Defeat ALL 8 Dark Aeons first. Penance has 12M HP body + 500K per arm. Judgment Day = 99,999 damage to all. Need max stats + perfect armor (Auto-Haste/Protect/Phoenix). Or use Yojimbo Zanmato!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Miscellaneous</h3>
+                <div class="achievement-category" data-category="misc">
+                    <div class="achievement-item" data-id="journeys-catalyst">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('journeys-catalyst')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">A Journey's Catalyst</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">View "Eternal Calm"</p>
+                            <div class="achievement-guide">From the game launcher, click "Final Fantasy X Eternal Calm" and watch the 15-minute video. That's it!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 2rem;">
+                    <strong>Note:</strong> This tracker covers the 34 FFX-specific achievements. The Steam version has 69 total achievements when combined with FFX-2. Your progress is saved in your browser's local storage - clearing browser data will reset your checkmarks.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 12: Tips -->
+        <section class="section" id="tips">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">12</span>Tips, Tricks, and FAQs</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <h3>Combat Tips</h3>
+                <ul>
+                    <li><strong>Swap characters in battle:</strong> EVERYONE who appears in battle gets full AP - swap in benchwarmer to keep them leveled</li>
+                    <li><strong>Flee never fails:</strong> If you can escape, Flee always works. Save spheres exist near bosses - no excuse for lost progress</li>
+                    <li><strong>Use Aeons as shields:</strong> Summon an Aeon to tank a deadly attack, then dismiss</li>
+                    <li><strong>Sensor/Scan everything:</strong> Know enemy HP and weaknesses before committing</li>
+                    <li><strong>Break abilities are crucial:</strong> Power/Magic/Armor/Mental Break cut enemy stats in half</li>
+                </ul>
+
+                <h3>General Tips</h3>
+                <ul>
+                    <li><strong>Talk to NPCs multiple times:</strong> Many have additional dialogue and some give items</li>
+                    <li><strong>Collect Al Bhed Primers:</strong> 26 total across the game - can carry over via New Game+</li>
+                    <li><strong>Get Destruction Sphere treasures ASAP:</strong> Required for Anima, blocked by Dark Aeons later</li>
+                    <li><strong>Customize Capture + Deathstrike:</strong> Instant kills that capture = fastest farming</li>
+                    <li><strong>Invest in Yojimbo:</strong> Pay him consistently (~1000 gil) to build compatibility for Zanmato</li>
+                </ul>
+
+                <h3>Lightning Dodging (Venus Sigil)</h3>
+                <div class="info-box">
+                    <strong>Must dodge 200 consecutive bolts in Thunder Plains:</strong>
+                    <ul>
+                        <li>Find a crater in the southern area where lightning strikes predictably</li>
+                        <li>Press X immediately when screen flashes white</li>
+                        <li>Do NOT leave the area or save - resets count</li>
+                        <li>Use No Encounters armor to avoid battles</li>
+                        <li>Takes about 15-20 minutes with focus</li>
+                    </ul>
+                </div>
+
+                <h3>Chocobo Race (Sun Sigil)</h3>
+                <div class="info-box">
+                    <strong>Must complete Catcher Chocobo race in 0:00.0 time or less:</strong>
+                    <ul>
+                        <li>Each balloon collected = -3 seconds</li>
+                        <li>Each bird hit = +3 seconds plus stun time</li>
+                        <li>Need ~12-13 balloons and 0-1 birds to achieve 0:00</li>
+                        <li><strong>Trick:</strong> Lose twice with 1+ minute on clock - balloons will spawn more favorably</li>
+                        <li>Stay on inside line, collect opening balloons, then move to sides to avoid birds</li>
+                    </ul>
+                </div>
+
+                <h3>Airship Passwords</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Password</th>
+                            <th>Location Unlocked</th>
+                            <th>Notable Contents</th>
+                        </tr>
+                        <tr><td><strong>GODHAND</strong></td><td>Mushroom Rock</td><td>Rikku's Celestial Weapon</td></tr>
+                        <tr><td><strong>VICTORIOUS</strong></td><td>Besaid Falls</td><td>Equipment chest</td></tr>
+                        <tr><td><strong>MURASAME</strong></td><td>Besaid Ruins 1</td><td>Equipment chest</td></tr>
+                    </table>
+                </div>
+
+                <h3>Frequently Asked Questions</h3>
+
+                <h4>Q: Can I still 100% the game if I missed something early?</h4>
+                <p><strong>A:</strong> Almost everything is obtainable post-game. The main exceptions are Destruction Sphere treasures blocked by Dark Aeons - you'll need to defeat them to access blocked temples.</p>
+
+                <h4>Q: What's the fastest way to max stats?</h4>
+                <p><strong>A:</strong> Capture all fiends for Monster Arena, defeat Don Tonberry with Triple AP weapons, farm stat spheres from specific Arena bosses, use Clear Spheres to replace weak nodes with +4 stat spheres.</p>
+
+                <h4>Q: Do I need to beat Dark Aeons/Penance for 100%?</h4>
+                <p><strong>A:</strong> For trophies/achievements, yes. For story completion, no - they're optional superboss content.</p>
+
+                <h4>Q: Best party for the final boss?</h4>
+                <p><strong>A:</strong> Tidus (Haste), Yuna (Aeons), and any third. The final boss is actually easy - Yu Yevon auto-casts Auto-Life on your party. Just hit him and don't petrify yourself.</p>
+
+                <div class="quote-box">
+                    <p>"Now! This is it! Now is the time to choose! Die and be free of pain, or live and fight your sorrow!"</p>
+                    <span class="attribution">— Auron</span>
+                </div>
+
+                <div class="info-box" style="text-align: center; margin-top: 2rem;">
+                    <strong>Good Luck, Guardian!</strong><br>
+                    This guide covers the essential strategies for completing Final Fantasy X HD Remaster. Whether you're experiencing Tidus and Yuna's journey for the first time or returning for 100% completion, remember: the game rewards exploration, experimentation, and persistence.<br><br>
+                    May your pilgrimage through Spira be successful. See you on the Farplane!
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Final Fantasy X HD Remaster Complete Strategy Guide</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Final Fantasy X is a trademark of Square Enix. This is an unofficial fan guide.</p>
+        </footer>
+    </main>
+
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">&#8593;</button>
+
+    <script>
+        // Toggle section collapse
+        function toggleSection(header) {
+            const section = header.parentElement;
+            section.classList.toggle('collapsed');
+        }
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        function setTheme(isDark) {
+            if (isDark) {
+                document.body.classList.remove('light-mode');
+                themeIcon.innerHTML = '&#9790;';
+                themeText.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.add('light-mode');
+                themeIcon.innerHTML = '&#9728;';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            setTheme(false);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isCurrentlyDark = !document.body.classList.contains('light-mode');
+            setTheme(!isCurrentlyDark);
+        });
+
+        // Font Size Controls
+        const fontIncrease = document.getElementById('fontIncrease');
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontSizeLabel = document.getElementById('fontSizeLabel');
+        const FONT_STORAGE_KEY = 'ffx_font_size';
+        const FONT_SIZES = [12, 14, 16, 18, 20, 22, 24];
+        let currentFontIndex = 2; // Default 16px (100%)
+
+        function updateFontSize(index) {
+            currentFontIndex = Math.max(0, Math.min(FONT_SIZES.length - 1, index));
+            const size = FONT_SIZES[currentFontIndex];
+            document.documentElement.style.setProperty('--font-size-base', size + 'px');
+            const percentage = Math.round((size / 16) * 100);
+            fontSizeLabel.textContent = percentage + '%';
+            localStorage.setItem(FONT_STORAGE_KEY, currentFontIndex.toString());
+        }
+
+        // Load saved font size
+        const savedFontSize = localStorage.getItem(FONT_STORAGE_KEY);
+        if (savedFontSize !== null) {
+            updateFontSize(parseInt(savedFontSize));
+        }
+
+        fontIncrease.addEventListener('click', () => {
+            updateFontSize(currentFontIndex + 1);
+        });
+
+        fontDecrease.addEventListener('click', () => {
+            updateFontSize(currentFontIndex - 1);
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar when clicking on a link (mobile)
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 900) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        // Close sidebar on window resize if going to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
+                closeSidebar();
+            }
+        });
+
+        // Progress bar
+        const progressBar = document.getElementById('progressBar');
+
+        function updateProgressBar() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+
+        function updateBackToTop() {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Active nav item tracking
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.section');
+
+        function updateActiveNav() {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Combined scroll handler
+        window.addEventListener('scroll', () => {
+            updateProgressBar();
+            updateBackToTop();
+            updateActiveNav();
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('searchResults');
+
+        const searchableContent = [
+            { title: 'Introduction', section: 'intro', keywords: ['overview', 'hd remaster', 'ctb', 'battle system'] },
+            { title: 'Story Walkthrough', section: 'walkthrough', keywords: ['besaid', 'kilika', 'luca', 'zanarkand', 'sin', 'yunalesca'] },
+            { title: 'Sphere Grid', section: 'sphere-grid', keywords: ['leveling', 'stats', 'abilities', 'key sphere', 'nodes'] },
+            { title: 'Celestial Weapons', section: 'celestial', keywords: ['caladbolg', 'nirvana', 'masamune', 'godhand', 'onion knight', 'world champion', 'spirit lance', 'sigil', 'crest'] },
+            { title: 'Aeons Guide', section: 'aeons', keywords: ['valefor', 'ifrit', 'ixion', 'shiva', 'bahamut', 'yojimbo', 'anima', 'magus sisters', 'summon'] },
+            { title: 'Blitzball', section: 'blitzball', keywords: ['jecht shot', 'wakka', 'tournament', 'league', 'players', 'nimrook'] },
+            { title: 'Dark Aeons & Penance', section: 'dark-aeons', keywords: ['superboss', 'dark valefor', 'dark bahamut', 'penance', 'judgment day', 'zanmato'] },
+            { title: 'Monster Arena & Bestiary', section: 'monster-arena', keywords: ['capture', 'farming', 'don tonberry', 'nemesis', 'stat spheres', 'bestiary', 'fiends', 'area conquest', 'species conquest', 'original creation', 'earth eater', 'greater sphere', 'fortune sphere', 'luck sphere', 'shinryu', 'ultima buster', 'fenrir', 'one-eye', 'catoblepas'] },
+            { title: 'Overdrives', section: 'overdrives', keywords: ['attack reels', 'mix', 'blitz ace', 'trio of 9999', 'ultra nullall'] },
+            { title: 'Items & Customization', section: 'items', keywords: ['auto-haste', 'auto-phoenix', 'ribbon', 'break damage limit', 'triple ap', 'bribe', 'dark matter', 'wings to discovery', 'chocobo wing', 'customize', 'armor', 'weapon'] },
+            { title: 'Achievement Tracker', section: 'achievements', keywords: ['trophy', 'steam', 'platinum', 'bronze', 'silver', 'gold', 'perfect sphere master', 'weapon master', 'blitzball master', 'perseverance', 'nemesis', 'completion'] },
+            { title: 'Tips & FAQs', section: 'tips', keywords: ['lightning dodge', 'chocobo race', 'airship passwords', 'godhand', 'victorious'] }
+        ];
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+
+            if (query.length < 2) {
+                searchResults.classList.remove('active');
+                return;
+            }
+
+            const matches = searchableContent.filter(item => {
+                return item.title.toLowerCase().includes(query) ||
+                       item.keywords.some(kw => kw.includes(query));
+            });
+
+            if (matches.length > 0) {
+                searchResults.innerHTML = matches.map(match =>
+                    `<div class="search-result-item" onclick="navigateToSection('${match.section}')">${match.title}</div>`
+                ).join('');
+                searchResults.classList.add('active');
+            } else {
+                searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+                searchResults.classList.add('active');
+            }
+        });
+
+        function navigateToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.remove('collapsed');
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                searchResults.classList.remove('active');
+                searchInput.value = '';
+            }
+        }
+
+        // Close search results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.classList.remove('active');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // Escape to close search
+            if (e.key === 'Escape') {
+                searchResults.classList.remove('active');
+                searchInput.blur();
+            }
+
+            // Ctrl/Cmd + K to focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+
+        // Achievement Tracker
+        const TOTAL_ACHIEVEMENTS = 34;
+        const STORAGE_KEY = 'ffx_achievements';
+
+        function getAchievements() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? JSON.parse(stored) : {};
+        }
+
+        function saveAchievements(achievements) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(achievements));
+        }
+
+        function toggleAchievement(id) {
+            const achievements = getAchievements();
+            achievements[id] = !achievements[id];
+            saveAchievements(achievements);
+            updateAchievementUI();
+        }
+
+        function resetAchievements() {
+            if (confirm('Are you sure you want to reset all achievement progress? This cannot be undone.')) {
+                localStorage.removeItem(STORAGE_KEY);
+                updateAchievementUI();
+            }
+        }
+
+        function updateAchievementUI() {
+            const achievements = getAchievements();
+            let completedCount = 0;
+
+            // Update checkboxes and item states
+            document.querySelectorAll('.achievement-item').forEach(item => {
+                const id = item.dataset.id;
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                const isCompleted = achievements[id] || false;
+
+                if (checkbox) {
+                    checkbox.checked = isCompleted;
+                }
+
+                if (isCompleted) {
+                    item.classList.add('completed');
+                    completedCount++;
+                } else {
+                    item.classList.remove('completed');
+                }
+            });
+
+            // Update stats
+            const countEl = document.getElementById('achievementCount');
+            const percentEl = document.getElementById('achievementPercent');
+            const progressBar = document.getElementById('achievementProgressBar');
+
+            if (countEl) countEl.textContent = completedCount;
+            if (percentEl) percentEl.textContent = Math.round((completedCount / TOTAL_ACHIEVEMENTS) * 100) + '%';
+            if (progressBar) progressBar.style.width = ((completedCount / TOTAL_ACHIEVEMENTS) * 100) + '%';
+        }
+
+        function filterAchievements(filter) {
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter items
+            document.querySelectorAll('.achievement-item').forEach(item => {
+                const isCompleted = item.classList.contains('completed');
+
+                if (filter === 'all') {
+                    item.classList.remove('hidden');
+                } else if (filter === 'complete') {
+                    item.classList.toggle('hidden', !isCompleted);
+                } else if (filter === 'incomplete') {
+                    item.classList.toggle('hidden', isCompleted);
+                }
+            });
+        }
+
+        // Set up filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterAchievements(btn.dataset.filter);
+            });
+        });
+
+        // Initialize achievements on page load
+        function initAchievements() {
+            updateAchievementUI();
+        }
+
+        // Initialize
+        updateProgressBar();
+        updateBackToTop();
+        updateActiveNav();
+        initAchievements();
+    </script>
+</body>
+</html>
