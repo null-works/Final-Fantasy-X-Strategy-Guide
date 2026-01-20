@@ -21,6 +21,7 @@
             --border-color: #334155;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
             --glow: 0 0 20px rgba(56, 189, 248, 0.3);
+            --font-size-base: 16px;
         }
 
         .light-mode {
@@ -52,6 +53,7 @@
             color: var(--text-primary);
             line-height: 1.7;
             min-height: 100vh;
+            font-size: var(--font-size-base);
         }
 
         /* Progress Bar */
@@ -200,6 +202,50 @@
             padding: 0.5rem 0.75rem;
             color: var(--text-primary);
             cursor: pointer;
+        }
+
+        /* Font Size Controls */
+        .font-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.25rem;
+        }
+
+        .font-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            min-width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .font-btn:hover {
+            background: var(--bg-card);
+            color: var(--accent-blue);
+        }
+
+        .font-btn:active {
+            transform: scale(0.95);
+        }
+
+        .font-size-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            padding: 0 0.25rem;
+            min-width: 28px;
+            text-align: center;
         }
 
         /* Sidebar */
@@ -586,7 +632,24 @@
             box-shadow: var(--glow);
         }
 
-        /* Mobile Styles */
+        /* Tablet Styles (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .main-content {
+                margin-right: 0.5rem;
+                padding: 2rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Mobile/Tablet Styles (up to 900px) */
         @media (max-width: 900px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -594,10 +657,12 @@
 
             .sidebar.active {
                 transform: translateX(0);
+                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
             }
 
             .main-content {
                 margin-left: 0;
+                margin-right: 0;
                 padding: 1.5rem;
             }
 
@@ -616,39 +681,227 @@
             .hero h2 {
                 font-size: 1.2rem;
             }
+
+            .font-controls {
+                padding: 0.15rem;
+            }
+
+            .font-btn {
+                padding: 0.2rem 0.4rem;
+                min-width: 28px;
+            }
+
+            .font-size-label {
+                display: none;
+            }
+
+            /* Sidebar overlay background */
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 998;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
         }
 
+        /* Phone Styles (up to 600px) */
         @media (max-width: 600px) {
             header {
                 padding: 0.75rem 1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
             }
 
             .logo h1 {
                 display: none;
             }
 
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .header-controls {
+                gap: 0.5rem;
+            }
+
             #search-input {
-                width: 120px;
+                width: 100px;
+                padding: 0.4rem 0.8rem 0.4rem 2rem;
+                font-size: 0.85rem;
+            }
+
+            .theme-toggle {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.85rem;
+            }
+
+            .theme-toggle span:last-child {
+                display: none;
             }
 
             .main-content {
                 padding: 1rem;
+                margin-top: 65px;
+            }
+
+            .sidebar {
+                top: 65px;
+                height: calc(100vh - 65px);
+                width: 85vw;
+                max-width: 300px;
             }
 
             .hero {
-                padding: 2rem 1rem;
+                padding: 1.5rem 1rem;
+                border-radius: 12px;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .section {
+                border-radius: 8px;
+            }
+
+            .section-header {
+                padding: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1rem;
+                gap: 0.5rem;
+            }
+
+            .section-number {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
             }
 
             .section-content {
                 padding: 1rem;
             }
 
+            .section-content h3 {
+                font-size: 1rem;
+            }
+
+            .section-content p,
+            .section-content li {
+                font-size: 0.9rem;
+            }
+
             table {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
             }
 
             th, td {
-                padding: 0.5rem;
+                padding: 0.4rem 0.5rem;
+            }
+
+            .tip-box, .warning-box {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .nav-item {
+                padding: 0.75rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        /* Very small phones (up to 380px) */
+        @media (max-width: 380px) {
+            header {
+                padding: 0.5rem 0.75rem;
+            }
+
+            #search-input {
+                width: 80px;
+            }
+
+            .font-controls {
+                display: none;
+            }
+
+            .main-content {
+                padding: 0.75rem;
+            }
+
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+
+            .section-header h2 {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Touch device improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-item {
+                padding: 0.85rem 1rem;
+            }
+
+            .section-header {
+                padding: 1rem 1.25rem;
+            }
+
+            .font-btn {
+                min-width: 40px;
+                min-height: 40px;
+            }
+
+            .theme-toggle,
+            .menu-toggle {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* Landscape phone */
+        @media (max-width: 900px) and (orientation: landscape) {
+            .hero {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero p {
+                display: none;
             }
         }
 
@@ -951,6 +1204,11 @@
                 <input type="text" id="search-input" placeholder="Search guide...">
                 <div class="search-results" id="searchResults"></div>
             </div>
+            <div class="font-controls" title="Adjust font size">
+                <button class="font-btn" id="fontDecrease" aria-label="Decrease font size">A-</button>
+                <span class="font-size-label" id="fontSizeLabel">100%</span>
+                <button class="font-btn" id="fontIncrease" aria-label="Increase font size">A+</button>
+            </div>
             <button class="theme-toggle" id="themeToggle">
                 <span id="themeIcon">&#9790;</span>
                 <span id="themeText">Light</span>
@@ -958,6 +1216,8 @@
             <button class="menu-toggle" id="menuToggle">&#9776;</button>
         </div>
     </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-section">
@@ -2653,21 +2913,71 @@
             setTheme(!isCurrentlyDark);
         });
 
+        // Font Size Controls
+        const fontIncrease = document.getElementById('fontIncrease');
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontSizeLabel = document.getElementById('fontSizeLabel');
+        const FONT_STORAGE_KEY = 'ffx_font_size';
+        const FONT_SIZES = [12, 14, 16, 18, 20, 22, 24];
+        let currentFontIndex = 2; // Default 16px (100%)
+
+        function updateFontSize(index) {
+            currentFontIndex = Math.max(0, Math.min(FONT_SIZES.length - 1, index));
+            const size = FONT_SIZES[currentFontIndex];
+            document.documentElement.style.setProperty('--font-size-base', size + 'px');
+            const percentage = Math.round((size / 16) * 100);
+            fontSizeLabel.textContent = percentage + '%';
+            localStorage.setItem(FONT_STORAGE_KEY, currentFontIndex.toString());
+        }
+
+        // Load saved font size
+        const savedFontSize = localStorage.getItem(FONT_STORAGE_KEY);
+        if (savedFontSize !== null) {
+            updateFontSize(parseInt(savedFontSize));
+        }
+
+        fontIncrease.addEventListener('click', () => {
+            updateFontSize(currentFontIndex + 1);
+        });
+
+        fontDecrease.addEventListener('click', () => {
+            updateFontSize(currentFontIndex - 1);
+        });
+
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-        menuToggle.addEventListener('click', () => {
+        function toggleSidebar() {
             sidebar.classList.toggle('active');
-        });
+            sidebarOverlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
 
         // Close sidebar when clicking on a link (mobile)
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', () => {
                 if (window.innerWidth <= 900) {
-                    sidebar.classList.remove('active');
+                    closeSidebar();
                 }
             });
+        });
+
+        // Close sidebar on window resize if going to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
+                closeSidebar();
+            }
         });
 
         // Progress bar
