@@ -678,6 +678,263 @@
             padding: 0.1em 0.2em;
             border-radius: 2px;
         }
+
+        /* Achievement Tracker Styles */
+        .achievement-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .stat-box {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .achievement-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-color: transparent;
+            color: white;
+        }
+
+        .reset-btn {
+            background: rgba(248, 113, 113, 0.2);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .reset-btn:hover {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .achievement-progress-bar {
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .achievement-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-gold));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .achievement-category {
+            margin-bottom: 1rem;
+        }
+
+        .achievement-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .achievement-item:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .achievement-item.completed {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        .achievement-item.completed .achievement-name {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .achievement-item.hidden {
+            display: none;
+        }
+
+        .achievement-checkbox {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            padding-top: 0.2rem;
+        }
+
+        .achievement-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            height: 24px;
+            width: 24px;
+            min-width: 24px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .achievement-checkbox:hover .checkmark {
+            border-color: var(--accent-blue);
+        }
+
+        .achievement-checkbox input:checked ~ .checkmark {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .achievement-checkbox input:checked ~ .checkmark::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .achievement-info {
+            flex: 1;
+        }
+
+        .achievement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .achievement-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .achievement-tier {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .achievement-tier.bronze {
+            background: rgba(205, 127, 50, 0.2);
+            color: #cd7f32;
+        }
+
+        .achievement-tier.silver {
+            background: rgba(192, 192, 192, 0.2);
+            color: #c0c0c0;
+        }
+
+        .achievement-tier.gold {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+        }
+
+        .achievement-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-guide {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .achievement-guide .warning-text {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .achievement-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .achievement-stats {
+                justify-content: center;
+            }
+
+            .achievement-buttons {
+                justify-content: center;
+            }
+
+            .achievement-item {
+                flex-direction: column;
+            }
+
+            .achievement-checkbox {
+                align-self: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
@@ -715,7 +972,8 @@
             <a href="#monster-arena" class="nav-item"><span class="nav-item-number">8</span>Monster Arena & Bestiary</a>
             <a href="#overdrives" class="nav-item"><span class="nav-item-number">9</span>Overdrives</a>
             <a href="#items" class="nav-item"><span class="nav-item-number">10</span>Items & Customization</a>
-            <a href="#tips" class="nav-item"><span class="nav-item-number">11</span>Tips & FAQs</a>
+            <a href="#achievements" class="nav-item"><span class="nav-item-number">11</span>Achievement Tracker</a>
+            <a href="#tips" class="nav-item"><span class="nav-item-number">12</span>Tips & FAQs</a>
         </div>
     </nav>
 
@@ -1703,10 +1961,567 @@
             </div>
         </section>
 
-        <!-- Section 11: Tips -->
+        <!-- Section 11: Achievement Tracker -->
+        <section class="section" id="achievements">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><span class="section-number">11</span>Steam Achievement Tracker</h2>
+                <span class="collapse-icon">&#9660;</span>
+            </div>
+            <div class="section-content">
+                <p>Track your FFX achievement progress! Since Steam combines FFX and X-2 achievements, this tracker focuses only on FFX. Your progress is saved locally in your browser.</p>
+
+                <div class="achievement-controls">
+                    <div class="achievement-stats">
+                        <div class="stat-box">
+                            <span class="stat-number" id="achievementCount">0</span>
+                            <span class="stat-label">/ 34 Complete</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number" id="achievementPercent">0%</span>
+                            <span class="stat-label">Progress</span>
+                        </div>
+                    </div>
+                    <div class="achievement-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="incomplete">Incomplete</button>
+                        <button class="filter-btn" data-filter="complete">Complete</button>
+                        <button class="reset-btn" onclick="resetAchievements()">Reset All</button>
+                    </div>
+                </div>
+
+                <div class="achievement-progress-bar">
+                    <div class="achievement-progress-fill" id="achievementProgressBar"></div>
+                </div>
+
+                <h3>Story Achievements (Unmissable)</h3>
+                <div class="achievement-category" data-category="story">
+                    <div class="achievement-item" data-id="the-right-thing">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('the-right-thing')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">The Right Thing</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Clear the Besaid Cloister of Trials</p>
+                            <div class="achievement-guide">Automatically obtained during story progression in Besaid Temple.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="all-together">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('all-together')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">All Together</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">All party members come together</p>
+                            <div class="achievement-guide">Automatically obtained when Rikku joins after crossing the Moonflow.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="heartstrings">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('heartstrings')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Heartstrings</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">View the "Underwater Date" scene</p>
+                            <div class="achievement-guide">Automatically triggers in Macalania Woods after leaving Bevelle. The famous lake scene with Tidus and Yuna.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="overcoming-the-past">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('overcoming-the-past')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Overcoming the Past</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Yunalesca</p>
+                            <div class="achievement-guide">Story boss in Zanarkand Ruins. Tip: Bring Zombie Ward armor or Holy Water - she uses Mega Death which kills non-Zombie party members!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="destination-of-hatred">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('destination-of-hatred')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">The Destination of Hatred</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Seymour Omnis</p>
+                            <div class="achievement-guide">Final Seymour fight inside Sin. He cycles through elements - use NulBlaze/NulFrost/NulShock/NulTide or Shell to survive.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="eternal-calm">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('eternal-calm')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">The Eternal Calm</span>
+                                <span class="achievement-tier gold">Gold</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Yu Yevon and complete the game</p>
+                            <div class="achievement-guide">Final boss. Yu Yevon auto-casts Auto-Life on your party, so you can't lose. Just attack and don't petrify yourself!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Aeon Achievements</h3>
+                <div class="achievement-category" data-category="aeons">
+                    <div class="achievement-item" data-id="feel-the-pain">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('feel-the-pain')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Feel the Pain</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Obtain Anima</p>
+                            <div class="achievement-guide"><strong>Requirements:</strong> ALL Destruction Sphere treasures from: Besaid, Kilika, Djose, Macalania, Bevelle, Zanarkand. Then go to Baaj Temple (Airship: X=11-16, Y=57-63). <span class="warning-text">WARNING: Dark Aeons can block temples!</span></div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="its-all-about-money">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('its-all-about-money')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">It's All About the Money</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Obtain Yojimbo</p>
+                            <div class="achievement-guide">Found in Cavern of the Stolen Fayth (Calm Lands gorge). Negotiate: Choose "To defeat powerful enemies" and offer half his price +1 gil.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="delta-attack">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('delta-attack')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Delta Attack!</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Obtain Magus Sisters</p>
+                            <div class="achievement-guide"><strong>Requirements:</strong> Have Yojimbo + Anima. Get Flower Scepter (defeat Belgemine's Bahamut). Get Blossom Crown (capture all Mt. Gagazet fiends). Go to Remiem Temple.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="summon-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('summon-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Summon Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Obtain all Aeons</p>
+                            <div class="achievement-guide">Obtain all 8 Aeons: Valefor, Ifrit, Ixion, Shiva, Bahamut (story) + Yojimbo, Anima, Magus Sisters (optional).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Celestial Weapon Achievements</h3>
+                <div class="achievement-category" data-category="celestial">
+                    <div class="achievement-item" data-id="weapon-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('weapon-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Weapon Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Obtain all Celestial Weapons</p>
+                            <div class="achievement-guide">Fully power up all 7 Celestial Weapons. Requires getting each weapon + its Crest + its Sigil. See Section 4 for full details.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="chocobo-rider">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('chocobo-rider')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Chocobo Rider</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Get 0:0:0 in the Catcher Chocobo race</p>
+                            <div class="achievement-guide"><strong>For Sun Sigil (Tidus).</strong> Balloons = -3 sec, Birds = +3 sec. Need ~12-13 balloons and 0-1 birds. Tip: Lose twice first - balloons spawn better!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="lightning-dancer">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('lightning-dancer')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Lightning Dancer</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Dodge 200 lightning bolts and get the reward</p>
+                            <div class="achievement-guide"><strong>For Venus Sigil (Lulu).</strong> Find the crater in southern Thunder Plains for predictable strikes. Press X when screen flashes. Use No Encounters armor. DON'T save or leave - resets count!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="chocobo-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('chocobo-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Chocobo Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Get 5 chests in Remiem Temple race</p>
+                            <div class="achievement-guide">Race at Remiem Temple (Calm Lands). Open all 5 chests while still winning. Rewards include 30x Wings to Discovery and 60x Three Stars!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="chocobo-license">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('chocobo-license')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Chocobo License</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Complete all chocobo training exercises</p>
+                            <div class="achievement-guide">Complete all 4 chocobo training modes in Calm Lands: Wobbly Chocobo, Dodger Chocobo, Hyper Dodger Chocobo, Catcher Chocobo.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Blitzball Achievements</h3>
+                <div class="achievement-category" data-category="blitzball">
+                    <div class="achievement-item" data-id="teamwork">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('teamwork')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Teamwork!</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Win a Blitzball match</p>
+                            <div class="achievement-guide">Win any Blitzball match. Easiest after recruiting better players like Brother (fastest in game) and Nimrook (best goalie).</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="show-off">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('show-off')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Show Off!</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Win a Blitzball tournament</p>
+                            <div class="achievement-guide">Win a tournament (3 matches). Use Jecht Shot to eliminate 2 defenders per shot. Tournaments reset prizes - exit/re-enter to re-roll rewards!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="striker">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('striker')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Striker</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Learn the Jecht Shot</p>
+                            <div class="achievement-guide">On S.S. Winno (Kilika to Luca). SAVE before the blitzball on deck! Hit D-pad + X toward appearing text 11 times. Missed it? Return via airship later.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="blitzball-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('blitzball-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Blitzball Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Unlock all of Wakka's slot reels</p>
+                            <div class="achievement-guide"><strong>Attack Reels:</strong> Tournament 1st. <strong>Status Reels:</strong> League 1st. <strong>Auroch Reels:</strong> Tournament after 450+ battles. Exit/re-enter to re-roll prizes.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Sphere Grid & Combat Achievements</h3>
+                <div class="achievement-category" data-category="combat">
+                    <div class="achievement-item" data-id="power-strike">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('power-strike')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Power Strike</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Deal 9,999+ damage in one attack</p>
+                            <div class="achievement-guide">Level up Auron or use any Celestial Weapon. Easy to get mid-game with decent Strength stats.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="mega-strike">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('mega-strike')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Mega Strike</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Deal 99,999 damage in one attack</p>
+                            <div class="achievement-guide">Requires Break Damage Limit (Celestial Weapon or 60x Dark Matter). Max Strength (255) and use Quick Hit or Attack Reels against low-defense enemy.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="sphere-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('sphere-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Sphere Master</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Complete entire Sphere Grid for one character</p>
+                            <div class="achievement-guide">ALL nodes must be activated including empty ones. Use Clear Spheres + stat spheres to fill empty nodes. Don Tonberry AP farming recommended.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="perfect-sphere-master">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('perfect-sphere-master')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Perfect Sphere Master</span>
+                                <span class="achievement-tier gold">Gold</span>
+                            </div>
+                            <p class="achievement-desc">Complete Sphere Grid for ALL characters</p>
+                            <div class="achievement-guide">ALL 7 characters must have ALL nodes activated. This takes 50+ hours of grinding. Use Don Tonberry + Triple AP weapon setup.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="learning">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('learning')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Learning!</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Learn all Ronso Rage abilities</p>
+                            <div class="achievement-guide">Use Lancet with Kimahri on specific enemies: Fire Breath (Dual Horn), Seed Cannon (Ragora), Self-Destruct (Bomb), Aqua Breath (Chimera), Stone Breath (Anacondaur/Basilisk), Thrust Kick (YKT-63), Doom (Ghost), White Wind (Dark Flan), Bad Breath (Malboro), Mighty Guard (Behemoth), Nova (Omega Weapon/Nemesis).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Collection Achievements</h3>
+                <div class="achievement-category" data-category="collection">
+                    <div class="achievement-item" data-id="speaking-in-tongues">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('speaking-in-tongues')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Speaking in Tongues</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Find 1 Al Bhed Primer</p>
+                            <div class="achievement-guide">First one is in Al Bhed Salvage Ship at game start. Easy to get naturally.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="master-linguist">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('master-linguist')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Master Linguist</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">Find all 26 Al Bhed Primers</p>
+                            <div class="achievement-guide"><span class="warning-text">MISSABLE!</span> Some are in one-time areas: Home (4 primers), Bevelle (1 primer). Compilation spheres in Sanubia can recover missed ones IF you have a previous save with them.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="messenger-from-past">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('messenger-from-past')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Messenger from the Past</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Collect all Jecht Spheres</p>
+                            <div class="achievement-guide">10 Jecht Spheres total. First available after defeating Spherimorph. Locations: Macalania Woods (x2), Besaid, S.S. Liki, Luca, Mi'ihen (x2), Moonflow, Thunder Plains, Mt. Gagazet.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="theater-enthusiast">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('theater-enthusiast')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Theater Enthusiast</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Buy all spheres at Luca Theater</p>
+                            <div class="achievement-guide">Costs ~426,000 gil total. 50 music spheres (2,000 each) + 68 movie spheres (5,000 each) + 3 special music (40,000 from left NPC). Best done late-game with Gillionaire.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="talent-for-acquisition">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('talent-for-acquisition')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">A Talent for Acquisition</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Steal 200 times with Rikku</p>
+                            <div class="achievement-guide">Use Steal or Mug 200 times. Counts even if steal fails! Grind on weak enemies or during Monster Arena capturing.</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="under-the-table">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('under-the-table')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Under the Table</span>
+                                <span class="achievement-tier bronze">Bronze</span>
+                            </div>
+                            <p class="achievement-desc">Spend 100,000+ gil on bribes</p>
+                            <div class="achievement-guide">Cumulative total. Best done while farming: Machea (Chocobo Wings), Malboro (Wings to Discovery), Ghost (Mega Phoenix).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Superboss Achievements</h3>
+                <div class="achievement-category" data-category="superboss">
+                    <div class="achievement-item" data-id="overcoming-nemesis">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('overcoming-nemesis')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Overcoming the Nemesis</span>
+                                <span class="achievement-tier gold">Gold</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Nemesis</p>
+                            <div class="achievement-guide"><strong>Requirements:</strong> Capture 10 of every fiend + defeat ALL other Monster Arena creations. Nemesis has 10M HP and counters everything except Quick Hit with Ultima. Need max stats!</div>
+                        </div>
+                    </div>
+
+                    <div class="achievement-item" data-id="perseverance">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('perseverance')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">Perseverance</span>
+                                <span class="achievement-tier gold">Gold</span>
+                            </div>
+                            <p class="achievement-desc">Defeat Penance</p>
+                            <div class="achievement-guide"><strong>Requirements:</strong> Defeat ALL 8 Dark Aeons first. Penance has 12M HP body + 500K per arm. Judgment Day = 99,999 damage to all. Need max stats + perfect armor (Auto-Haste/Protect/Phoenix). Or use Yojimbo Zanmato!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Miscellaneous</h3>
+                <div class="achievement-category" data-category="misc">
+                    <div class="achievement-item" data-id="journeys-catalyst">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" onchange="toggleAchievement('journeys-catalyst')">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="achievement-info">
+                            <div class="achievement-header">
+                                <span class="achievement-name">A Journey's Catalyst</span>
+                                <span class="achievement-tier silver">Silver</span>
+                            </div>
+                            <p class="achievement-desc">View "Eternal Calm"</p>
+                            <div class="achievement-guide">From the game launcher, click "Final Fantasy X Eternal Calm" and watch the 15-minute video. That's it!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 2rem;">
+                    <strong>Note:</strong> This tracker covers the 34 FFX-specific achievements. The Steam version has 69 total achievements when combined with FFX-2. Your progress is saved in your browser's local storage - clearing browser data will reset your checkmarks.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 12: Tips -->
         <section class="section" id="tips">
             <div class="section-header" onclick="toggleSection(this)">
-                <h2><span class="section-number">11</span>Tips, Tricks, and FAQs</h2>
+                <h2><span class="section-number">12</span>Tips, Tricks, and FAQs</h2>
                 <span class="collapse-icon">&#9660;</span>
             </div>
             <div class="section-content">
@@ -1924,6 +2739,7 @@
             { title: 'Monster Arena & Bestiary', section: 'monster-arena', keywords: ['capture', 'farming', 'don tonberry', 'nemesis', 'stat spheres', 'bestiary', 'fiends', 'area conquest', 'species conquest', 'original creation', 'earth eater', 'greater sphere', 'fortune sphere', 'luck sphere', 'shinryu', 'ultima buster', 'fenrir', 'one-eye', 'catoblepas'] },
             { title: 'Overdrives', section: 'overdrives', keywords: ['attack reels', 'mix', 'blitz ace', 'trio of 9999', 'ultra nullall'] },
             { title: 'Items & Customization', section: 'items', keywords: ['auto-haste', 'auto-phoenix', 'ribbon', 'break damage limit', 'triple ap', 'bribe', 'dark matter', 'wings to discovery', 'chocobo wing', 'customize', 'armor', 'weapon'] },
+            { title: 'Achievement Tracker', section: 'achievements', keywords: ['trophy', 'steam', 'platinum', 'bronze', 'silver', 'gold', 'perfect sphere master', 'weapon master', 'blitzball master', 'perseverance', 'nemesis', 'completion'] },
             { title: 'Tips & FAQs', section: 'tips', keywords: ['lightning dodge', 'chocobo race', 'airship passwords', 'godhand', 'victorious'] }
         ];
 
@@ -1983,10 +2799,105 @@
             }
         });
 
+        // Achievement Tracker
+        const TOTAL_ACHIEVEMENTS = 34;
+        const STORAGE_KEY = 'ffx_achievements';
+
+        function getAchievements() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? JSON.parse(stored) : {};
+        }
+
+        function saveAchievements(achievements) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(achievements));
+        }
+
+        function toggleAchievement(id) {
+            const achievements = getAchievements();
+            achievements[id] = !achievements[id];
+            saveAchievements(achievements);
+            updateAchievementUI();
+        }
+
+        function resetAchievements() {
+            if (confirm('Are you sure you want to reset all achievement progress? This cannot be undone.')) {
+                localStorage.removeItem(STORAGE_KEY);
+                updateAchievementUI();
+            }
+        }
+
+        function updateAchievementUI() {
+            const achievements = getAchievements();
+            let completedCount = 0;
+
+            // Update checkboxes and item states
+            document.querySelectorAll('.achievement-item').forEach(item => {
+                const id = item.dataset.id;
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                const isCompleted = achievements[id] || false;
+
+                if (checkbox) {
+                    checkbox.checked = isCompleted;
+                }
+
+                if (isCompleted) {
+                    item.classList.add('completed');
+                    completedCount++;
+                } else {
+                    item.classList.remove('completed');
+                }
+            });
+
+            // Update stats
+            const countEl = document.getElementById('achievementCount');
+            const percentEl = document.getElementById('achievementPercent');
+            const progressBar = document.getElementById('achievementProgressBar');
+
+            if (countEl) countEl.textContent = completedCount;
+            if (percentEl) percentEl.textContent = Math.round((completedCount / TOTAL_ACHIEVEMENTS) * 100) + '%';
+            if (progressBar) progressBar.style.width = ((completedCount / TOTAL_ACHIEVEMENTS) * 100) + '%';
+        }
+
+        function filterAchievements(filter) {
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter items
+            document.querySelectorAll('.achievement-item').forEach(item => {
+                const isCompleted = item.classList.contains('completed');
+
+                if (filter === 'all') {
+                    item.classList.remove('hidden');
+                } else if (filter === 'complete') {
+                    item.classList.toggle('hidden', !isCompleted);
+                } else if (filter === 'incomplete') {
+                    item.classList.toggle('hidden', isCompleted);
+                }
+            });
+        }
+
+        // Set up filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterAchievements(btn.dataset.filter);
+            });
+        });
+
+        // Initialize achievements on page load
+        function initAchievements() {
+            updateAchievementUI();
+        }
+
         // Initialize
         updateProgressBar();
         updateBackToTop();
         updateActiveNav();
+        initAchievements();
     </script>
 </body>
 </html>
